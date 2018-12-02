@@ -221,7 +221,15 @@ set title
 
 " Ability to copy and paste outside of vim
 " set clipboard=unnamed
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
+" yank to clipboard
+if has("clipboard")
+  set clipboard=unnamed " copy to the system clipboard
+
+  if has("unnamedplus") " X11 support
+    set clipboard+=unnamedplus
+  endif
+endif
 
 "turn off the scroll bar
 set guioptions-=L
