@@ -141,6 +141,10 @@ endif
 set foldmethod=indent   "fold based on indent
 set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
+" Enable folding
+set foldlevel=99
+" Enable folding with the spacebar
+nnoremap <space> za
 
 " ================ Scrolling ========================
 
