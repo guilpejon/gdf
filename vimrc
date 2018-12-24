@@ -211,6 +211,7 @@ colorscheme molokai
 set synmaxcol=300
 " syntax sync minlines=10000
 set redrawtime=10000
+let python_highlight_all=1
 "turn on syntax highlighting
 syntax on
 
