@@ -459,6 +459,7 @@ let g:UltiSnipsEditSplit="vertical"
 " ================ indentLine =====================
 
 let g:indentLine_setColors = 1
+let g:indentLine_conceallevel = 0
 
 " ================ PrettyXml ======================
 
