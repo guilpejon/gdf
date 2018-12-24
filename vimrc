@@ -162,6 +162,15 @@ set softtabstop=2
 set tabstop=2
 set expandtab
 
+au BufNewFile,BufRead *.py
+   \ set tabstop=4 |
+   \ set softtabstop=4 |
+   \ set shiftwidth=4 |
+   \ set textwidth=79 |
+   \ set expandtab |
+   \ set autoindent |
+   \ set fileformat=unix
+
 "load ftplugins and indent files
 filetype plugin on
 filetype indent on
