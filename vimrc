@@ -356,6 +356,12 @@ vnoremap <C-p> "+gP
 
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinSize = 30
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeQuitOnOpen = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+
+nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 
 silent! nmap <silent> <Leader>p :NERDTreeToggle<CR>
 nmap wm :NERDTree<cr>
