@@ -171,6 +171,15 @@ au BufNewFile,BufRead *.py
    \ set autoindent |
    \ set fileformat=unix
 
+au BufNewFile,BufRead *.rb,*.erb
+   \ set tabstop=2 |
+   \ set softtabstop=2 |
+   \ set shiftwidth=2 |
+   \ set textwidth=79 |
+   \ set expandtab |
+   \ set autoindent |
+   \ set fileformat=unix
+
 "load ftplugins and indent files
 filetype plugin on
 filetype indent on
