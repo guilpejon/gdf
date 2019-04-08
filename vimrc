@@ -30,6 +30,16 @@ set timeout timeoutlen=1500
 " Show long lines
 set display+=lastline
 
+" more natural split opening
+set splitbelow
+set splitright
+
+" use C-j/k/l/h to change between splits
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 " ==================== Vim Wiki  =================
 " Run multiple wikis "
 let g:vimwiki_list = [
