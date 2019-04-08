@@ -34,12 +34,6 @@ set display+=lastline
 set splitbelow
 set splitright
 
-" use C-j/k/l/h to change between splits
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
 " ==================== Vim Wiki  =================
 " Run multiple wikis "
 let g:vimwiki_list = [
@@ -347,11 +341,11 @@ map <Leader>; :%s/;//g <CR>
 map <Leader>. :%s/{//g <CR>
 map <Leader>/ :%s/}//g <CR>
 
-" Easy CTRL+W
-nmap <silent> <S-UP> :wincmd k<CR>
-nmap <silent> <S-DOWN> :wincmd j<CR>
-nmap <silent> <S-LEFT> :wincmd h<CR>
-nmap <silent> <S-RIGHT> :wincmd l<CR>
+" Easy CTRL+W with SHIFT
+nnoremap <S-DOWN> <C-W><C-J>
+nnoremap <S-UP> <C-W><C-K>
+nnoremap <S-RIGHT> <C-W><C-L>
+nnoremap <S-LEFT> <C-W><C-H>
 
 " Copy outside of vim with C-y and paste with C-p
 nnoremap <C-y> "+y
