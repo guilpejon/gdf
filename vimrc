@@ -1,8 +1,51 @@
 "Use Vim settings, rather then Vi settings (much better!).
 "This must be first, because it changes other options as a side effect.
 set nocompatible
+filetype off
+
+" ================ Vundle ============================
+
+set rtp+=~/.vim/bundle/Vundle.vim
+
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'w0rp/ale'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'Yggdroot/indentLine'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'vim-airline/vim-airline'
+Plugin 'craigemery/vim-autotag'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-commentary'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tpope/vim-dispatch'
+Plugin 'sjl/gundo.vim'
+Plugin 'ervandew/supertab'
+Plugin 'majutsushi/tagbar'
+Plugin 'tpope/vim-bundler'
+Plugin 'tpope/vim-endwise'
+Plugin 'nvie/vim-flake8'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-repeat'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 " ================ General Config ====================
+
+filetype plugin on
 
 "load pathogen managed plugins
 call pathogen#infect()
@@ -37,10 +80,10 @@ set complete+=kspell
 let g:html_indent_tags = 'li\|p'
 
 " Get off my lawn
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
+" nnoremap <Left> :echoe "Use h"<CR>
+" nnoremap <Right> :echoe "Use l"<CR>
+" nnoremap <Up> :echoe "Use k"<CR>
+" nnoremap <Down> :echoe "Use j"<CR>
 
 nnoremap <Leader><Leader> <C-^>
 
@@ -233,7 +276,6 @@ au BufNewFile,BufRead *.rb,*.erb
    \ set fileformat=unix
 
 "load ftplugins and indent files
-filetype plugin on
 filetype indent on
 
 " Display tabs and trailing spaces visually
