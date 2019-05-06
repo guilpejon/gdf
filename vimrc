@@ -347,6 +347,12 @@ nnoremap <S-UP> <C-W><C-K>
 nnoremap <S-RIGHT> <C-W><C-L>
 nnoremap <S-LEFT> <C-W><C-H>
 
+" Easy CTRL+W with C-vimkeys
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 " Copy outside of vim with C-y and paste with C-p
 nnoremap <C-y> "+y
 vnoremap <C-y> "+y
@@ -384,7 +390,7 @@ vnoremap <C-p> "+gP
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinSize = 30
 let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeQuitOnOpen = 1
+let NERDTreeQuitOnOpen = 0
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
