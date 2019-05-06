@@ -8,7 +8,7 @@ set nocompatible
 call pathogen#infect()
 set number                      "Line numbers are good
 set backspace=indent,eol,start  "Allow backspace in insert mode
-set history=1000                "Store lots of :cmdline history
+set history=500                 "Store lots of :cmdline history
 set showcmd                     "Show incomplete cmds down the bottom
 set showmode                    "Show current mode down the bottom
 set gcr=a:blinkon0              "Disable cursor blink
@@ -30,11 +30,59 @@ set timeout timeoutlen=1500
 " Show long lines
 set display+=lastline
 
-" more natural split opening
+" Autocomplete with dictionary words when spell check is on
+set complete+=kspell
+
+" Treat <li> and <p> tags like the block tags they are
+let g:html_indent_tags = 'li\|p'
+
+" Get off my lawn
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
+nnoremap <Leader><Leader> <C-^>
+
+" show the textwidth value column
+" set colorcolumn=+1
+
+" Numbers
+set number
+set numberwidth=5
+
+" Use one space, not two, after punctuation.
+set nojoinspaces
+
+" When the type of shell script is /bin/sh, assume a POSIX-compatible
+" shell for syntax highlighting purposes.
+let g:is_posix = 1
+
+" ==================== Splits ====================
+
+" Open new split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
 
-" ==================== Vim Wiki  =================
+" Easy CTRL+W with SHIFT
+nnoremap <S-DOWN> <C-W><C-J>
+nnoremap <S-UP> <C-W><C-K>
+nnoremap <S-RIGHT> <C-W><C-L>
+nnoremap <S-LEFT> <C-W><C-H>
+
+" Easy CTRL+W with C-vimkeys
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
+
+" Resize windows with arrow keys
+nnoremap <tab><Up> <C-w>+
+nnoremap <tab><Down> <C-w>-
+nnoremap <tab><Left> <C-w><
+nnoremap <tab><Right> <C-w>>
+
+" ==================== Vim Wiki ==================
 " Run multiple wikis "
 let g:vimwiki_list = [
                         \{'path': '~/Documents/VimWiki/personal.wiki'},
@@ -324,34 +372,31 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " make ^ work
 " nmap <S-6> ˆ
 
+" Tab completion
+" will insert tab at beginning of line,
+" will use completion if not at beginning
+set wildmode=list:longest,list:full
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<Tab>"
+    else
+        return "\<C-p>"
+    endif
+endfunction
+inoremap <Tab> <C-r>=InsertTabWrapper()<CR>
+inoremap <S-Tab> <C-n>
+
 " when press { + Enter, the {} block will expand.
 imap {<CR> {}<ESC>i<CR><ESC>
 
 "map Q to something useful
 noremap Q gg=G
 
-" Resize windows with arrow keys
-nnoremap <tab><Up> <C-w>+
-nnoremap <tab><Down> <C-w>-
-nnoremap <tab><Left> <C-w><
-nnoremap <tab><Right> <C-w>>
-
 " Remove all ; from file
 map <Leader>; :%s/;//g <CR>
 map <Leader>. :%s/{//g <CR>
 map <Leader>/ :%s/}//g <CR>
-
-" Easy CTRL+W with SHIFT
-nnoremap <S-DOWN> <C-W><C-J>
-nnoremap <S-UP> <C-W><C-K>
-nnoremap <S-RIGHT> <C-W><C-L>
-nnoremap <S-LEFT> <C-W><C-H>
-
-" Easy CTRL+W with C-vimkeys
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
 
 " Copy outside of vim with C-y and paste with C-p
 nnoremap <C-y> "+y
@@ -406,7 +451,7 @@ let NERDTreeIgnore=['\.swp$']
 " Enable gitlab private repos for fugitive plugin
 let g:fugitive_gitlab_domains = ['http://gitlab', 'http://gitlab.com']
 
-" Open split vertically
+" Always use vertical diffs
 set diffopt+=vertical
 
 " For fugitive.git, dp means :diffput. Define dg to mean :diffget
