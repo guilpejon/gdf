@@ -21,6 +21,7 @@ Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'tpope/vim-surround'
 Plugin 'vim-airline/vim-airline'
 Plugin 'craigemery/vim-autotag'
 Plugin 'kchmck/vim-coffee-script'
@@ -58,6 +59,9 @@ set gcr=a:blinkon0              "Disable cursor blink
 set visualbell                  "No sounds
 set autoread                    "Reload files changed outside vim
 
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
+
 " This makes vim act like all other editors, buffers can
 " " exist in the background without being in a window.
 " " http://items.sjbach.com/319/configuring-vim-right
@@ -88,7 +92,7 @@ let g:html_indent_tags = 'li\|p'
 nnoremap <Leader><Leader> <C-^>
 
 " show the textwidth value column
-" set colorcolumn=+1
+set colorcolumn=+1
 
 " Numbers
 set number
@@ -270,7 +274,7 @@ au BufNewFile,BufRead *.rb,*.erb
    \ set tabstop=2 |
    \ set softtabstop=2 |
    \ set shiftwidth=2 |
-   \ set textwidth=79 |
+   \ set textwidth=100 |
    \ set expandtab |
    \ set autoindent |
    \ set fileformat=unix
