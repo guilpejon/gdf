@@ -39,6 +39,9 @@ Plugin 'nvie/vim-flake8'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-repeat'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'roxma/vim-hug-neovim-rpc'
+Plugin 'roxma/nvim-yarp'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -521,10 +524,8 @@ let g:ale_sign_warning = '-'
 " let g:ale_lint_on_enter = 0
 
 " Prettier
-let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['prettier']
-let g:ale_fixers['ruby'] = ['rubocop']
-" let g:ale_fix_on_save = 1
+let g:ale_fixers = {'javascript': ['prettier'], 'ruby': ['rubocop']}
+let g:ale_fix_on_save = 1
 nnoremap gp :silent %!prettier --stdin --trailing-comma all --single-quote<CR>
 let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
 
@@ -623,6 +624,9 @@ endfunction
 command! PrettyXML call DoPrettyXML()
 
 " ================ Unclassified ===================
+
+" deoplete startup
+let g:deoplete#enable_at_startup = 1
 
 map ,Q :lclose<CR>
 map ,q :ccl<CR>
