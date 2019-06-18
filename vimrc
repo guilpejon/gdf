@@ -523,8 +523,10 @@ let g:ale_sign_warning = '-'
 " if you don't want linters to run on opening a file
 " let g:ale_lint_on_enter = 0
 
-" Prettier
-let g:ale_fixers = {'javascript': ['prettier'], 'ruby': ['rubocop']}
+let g:ale_linter_aliases = {'jsx': ['css', 'javascript']}
+let g:ale_linters = {'jsx': ['stylelint', 'eslint']}
+
+let g:ale_fixers = {'javascript': ['eslint'], 'ruby': ['rubocop']}
 let g:ale_fix_on_save = 1
 nnoremap gp :silent %!prettier --stdin --trailing-comma all --single-quote<CR>
 let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
