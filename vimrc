@@ -44,6 +44,7 @@ Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'roxma/nvim-yarp'
 Plugin 'dart-lang/dart-vim-plugin'
 Plugin 'thosakwe/vim-flutter'
+Plugin 'chrisbra/Colorizer'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -607,6 +608,15 @@ nnoremap <leader>fq :FlutterQuit<cr>
 nnoremap <leader>fr :FlutterHotReload<cr>
 nnoremap <leader>fR :FlutterHotRestart<cr>
 nnoremap <leader>fD :FlutterVisualDebug<cr>
+
+" ================ Colorizer ======================
+
+let g:colorizer_auto_filetype='css,html'
+let g:colorizer_auto_color = 1
+let g:colorizer_skip_comments = 1
+let g:colorizer_fgcontrast = 2 " 2 is default
+let g:colorizer_colornames = 1
+let g:colorizer_syntax = 1
 
 " ================ PrettyXml ======================
 
