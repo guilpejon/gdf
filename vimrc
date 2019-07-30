@@ -42,6 +42,8 @@ Plugin 'tpope/vim-repeat'
 Plugin 'Shougo/deoplete.nvim'
 Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'roxma/nvim-yarp'
+Plugin 'dart-lang/dart-vim-plugin'
+Plugin 'thosakwe/vim-flutter'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -526,7 +528,8 @@ let g:ale_sign_warning = '-'
 let g:ale_linter_aliases = {'jsx': ['css', 'javascript']}
 let g:ale_linters = {'jsx': ['stylelint', 'eslint']}
 
-let g:ale_fixers = {'javascript': ['eslint'], 'ruby': ['rubocop']}
+let g:ale_fixers = {'javascript': [], 'ruby': ['rubocop']}
+" let g:ale_fixers = {'javascript': ['eslint'], 'ruby': ['rubocop']}
 let g:ale_fix_on_save = 1
 nnoremap gp :silent %!prettier --stdin --trailing-comma all --single-quote<CR>
 let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
@@ -593,6 +596,17 @@ let g:UltiSnipsEditSplit="vertical"
 
 let g:indentLine_setColors = 1
 let g:indentLine_conceallevel = 0
+
+" ================= Flutter =======================
+
+" Enable Flutter menu
+" call FlutterMenu()
+
+nnoremap <leader>fa :FlutterRun<cr>
+nnoremap <leader>fq :FlutterQuit<cr>
+nnoremap <leader>fr :FlutterHotReload<cr>
+nnoremap <leader>fR :FlutterHotRestart<cr>
+nnoremap <leader>fD :FlutterVisualDebug<cr>
 
 " ================ PrettyXml ======================
 
