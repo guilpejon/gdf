@@ -84,7 +84,7 @@ set timeout timeoutlen=1500
 set display+=lastline
 
 " Autocomplete with dictionary words when spell check is on
-set complete+=kspell
+" set complete+=kspell
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
@@ -266,6 +266,15 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 set expandtab
+
+au BufNewFile,BufRead *.dart
+   \ set tabstop=2 |
+   \ set softtabstop=2 |
+   \ set shiftwidth=2 |
+   \ set textwidth=79 |
+   \ set expandtab |
+   \ set autoindent |
+   \ set fileformat=unix
 
 au BufNewFile,BufRead *.py
    \ set tabstop=4 |
@@ -649,10 +658,12 @@ function! DoPrettyXML()
 endfunction
 command! PrettyXML call DoPrettyXML()
 
-" ================ Unclassified ===================
+" =================== Deoplete =====================
 
 " deoplete startup
 let g:deoplete#enable_at_startup = 1
+
+" ================ Unclassified ===================
 
 map ,Q :lclose<CR>
 map ,q :ccl<CR>
