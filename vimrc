@@ -707,5 +707,6 @@ nnoremap <F4> :GundoToggle<CR>
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
 
 " autotag configuration
+nnoremap <leader>ct :silent ! ctags -R --languages=ruby --exclude={.git,log,node_modules,vendor,db} -f .tags<cr>
 let g:autotagTagsFile="tags"
-set tags=tags
+set tags+=.tags
