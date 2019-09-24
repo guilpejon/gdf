@@ -527,6 +527,9 @@ nnoremap ,cc :Rcontroller<cr>
 
 " ================ Ale =============================
 
+" start vim with linter column open
+let g:ale_sign_column_always = 1
+
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '-'
 
@@ -669,6 +672,7 @@ map ,Q :lclose<CR>
 map ,q :ccl<CR>
 
 " Airline (pretty tabs)
+let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
@@ -676,6 +680,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+nnoremap <leader>. :CtrlPTag<cr>
 
 "avoiding annoying CSApprox warning message
 let g:CSApprox_verbose_level = 0
@@ -703,3 +708,4 @@ nnoremap <silent> <Leader>b :TagbarToggle<CR>
 
 " autotag configuration
 let g:autotagTagsFile="tags"
+set tags=tags
