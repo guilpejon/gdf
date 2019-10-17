@@ -5,6 +5,22 @@ filetype off
 
 " ================ Plug-vim ============================
 
+" check whether vim-plug is installed and install it if necessary
+let plugpath = expand('<sfile>:p:h'). '/autoload/plug.vim'
+if !filereadable(plugpath)
+    if executable('curl')
+        let plugurl = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+        call system('curl -fLo ' . shellescape(plugpath) . ' --create-dirs ' . plugurl)
+        if v:shell_error
+            echom "Error downloading vim-plug. Please install it manually.\n"
+            exit
+        endif
+    else
+        echom "vim-plug not installed. Please install it manually or install curl.\n"
+        exit
+    endif
+endif
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'w0rp/ale'
@@ -40,7 +56,8 @@ Plug 'roxma/nvim-yarp'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'thosakwe/vim-flutter'
 Plug 'chrisbra/Colorizer'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}} " Language Server support
+Plug 'vim-ruby/vim-ruby' " For Facts, Ruby functions, and custom providers
 
 " Initialize plugin system
 call plug#end()
@@ -127,6 +144,21 @@ nnoremap <tab><Up> <C-w>+
 nnoremap <tab><Down> <C-w>-
 nnoremap <tab><Left> <C-w><
 nnoremap <tab><Right> <C-w>>
+
+" ====================== coc ======================
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_global_extensions = ['coc-solargraph']
 
 " ==================== Vim Wiki ==================
 " Run multiple wikis "
