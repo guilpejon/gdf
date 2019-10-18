@@ -1,59 +1,93 @@
 source ~/.vim/plugins.vim
 
+" =========================================================================== "
+" ===                          GENERAL CONFIG                             === "
+" =========================================================================== "
+
+" Change leader to a comma because the backslash is too far away
+let mapleader=","
+
 "Use Vim settings, rather then Vi settings (much better!).
 "This must be first, because it changes other options as a side effect.
 set nocompatible
-filetype off
 
-" ================ General Config ====================
-
+" File-type highlighting and configuration.
+syntax on
+filetype on
 filetype plugin on
+filetype indent on
 
-set number                      "Line numbers are good
-set backspace=indent,eol,start  "Allow backspace in insert mode
-set history=500                 "Store lots of :cmdline history
-set showcmd                     "Show incomplete cmds down the bottom
-set showmode                    "Show current mode down the bottom
-set gcr=a:blinkon0              "Disable cursor blink
-set visualbell                  "No sounds
-set autoread                    "Reload files changed outside vim
+" Don't show last command down the left bottom
+set noshowcmd
+" set showcmd
 
-" Allow saving of files as sudo when I forgot to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %
+" Ability to copy and paste outside of vim
+if has("clipboard")
+  set clipboard=unnamed " copy to the system clipboard
 
-" This makes vim act like all other editors, buffers can
-" " exist in the background without being in a window.
-" " http://items.sjbach.com/319/configuring-vim-right
-"set hidden
+  if has("unnamedplus") " X11 support
+    set clipboard+=unnamedplus
+  endif
+endif
 
-" Change leader to a comma because the backslash is too far away
-" " That means all \x commands turn into ,x
-" " The mapleader has to be set before vundle starts loading all
-" " the plugins.
-let mapleader=","
-set timeout timeoutlen=1500
+" Hides buffers instead of closing them
+" allow Vim to manage multiple buffers effectively
+set hidden
+
+" Enable extended % matching e.g. if/elsif/else/end
+runtime macros/matchit.vim
+
+" Display tabs and trailing spaces visually
+set list listchars=tab:\ \ ,trail:·
+
+" Wrap lines at convenient points
+set linebreak
+
+" do not wrap long lines by default
+set nowrap
+
+" Don't highlight current cursor line
+set nocursorline
+
+" Disable line/column number in status line
+" Shows up in preview window when airline is disabled if not
+set noruler
+
+" Only one line for command line
+set cmdheight=1
+
+" Don't give completion messages like 'match 1 of 2'
+" or 'The only match'
+set shortmess+=c
+
+" Allow backspace in insert mode
+set backspace=indent,eol,start
+
+" Store lots of :cmdline history
+set history=500
+
+" Show current mode down the bottom
+set showmode
+
+" Disable cursor blink
+set gcr=a:blinkon0
+
+" No sounds
+set visualbell
+
+" Reload files changed outside vim
+set autoread
 
 " Show long lines
 set display+=lastline
 
-" Autocomplete with dictionary words when spell check is on
-" set complete+=kspell
-
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
-
-" Get off my lawn
-" nnoremap <Left> :echoe "Use h"<CR>
-" nnoremap <Right> :echoe "Use l"<CR>
-" nnoremap <Up> :echoe "Use k"<CR>
-" nnoremap <Down> :echoe "Use j"<CR>
-
-nnoremap <Leader><Leader> <C-^>
 
 " show the textwidth value column
 set colorcolumn=+1
 
-" Numbers
+" Enable line numbers
 set number
 set numberwidth=5
 
@@ -64,137 +98,48 @@ set nojoinspaces
 " shell for syntax highlighting purposes.
 let g:is_posix = 1
 
-" ==================== Splits ====================
+" sex max col for syntax highlighting
+set synmaxcol=300
 
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
+" syntax sync minlines=10000
+set redrawtime=10000
 
-" Easy CTRL+W with SHIFT
-nnoremap <S-DOWN> <C-W><C-J>
-nnoremap <S-UP> <C-W><C-K>
-nnoremap <S-RIGHT> <C-W><C-L>
-nnoremap <S-LEFT> <C-W><C-H>
+let python_highlight_all=1
 
-" Easy CTRL+W with C-vimkeys
-" nnoremap <C-J> <C-W><C-J>
-" nnoremap <C-K> <C-W><C-K>
-" nnoremap <C-L> <C-W><C-L>
-" nnoremap <C-H> <C-W><C-H>
+" Sets the terminal title
+set title
 
-" Resize windows with arrow keys
-nnoremap <tab><Up> <C-w>+
-nnoremap <tab><Down> <C-w>-
-nnoremap <tab><Left> <C-w><
-nnoremap <tab><Right> <C-w>>
+" turn off the scroll bar
+set guioptions-=L
+set guioptions-=r
 
-" ====================== coc ======================
+set nocp
+set encoding=utf-8
+let g:rehash256 = 1
+let t_Co = 512
+set timeout timeoutlen=1500
+set showbreak=...
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-let g:coc_global_extensions = ['coc-solargraph']
-
-" ==================== Vim Wiki ==================
-" Run multiple wikis "
-let g:vimwiki_list = [
-                        \{'path': '~/Documents/VimWiki/personal.wiki'},
-                        \{'path': '~/Documents/VimWiki/tech.wiki'}
-                \]
-au BufRead,BufNewFile *.wiki set filetype=vimwiki
-:autocmd FileType vimwiki map d :VimwikiMakeDiaryNote
-function! ToggleCalendar()
-  execute ":Calendar"
-  if exists("g:calendar_open")
-    if g:calendar_open == 1
-      execute "q"
-      unlet g:calendar_open
-    else
-      g:calendar_open = 1
-    end
-  else
-    let g:calendar_open = 1
-  end
-endfunction
-:autocmd FileType vimwiki map c :call ToggleCalendar()
-
-" ================ Zoom on Windows  ================
-
-" Zoom / Restore window.
-function! s:ZoomToggle() abort
-    if exists('t:zoomed') && t:zoomed
-        execute t:zoom_winrestcmd
-        let t:zoomed = 0
-    else
-        let t:zoom_winrestcmd = winrestcmd()
-        resize
-        vertical resize
-        let t:zoomed = 1
-    endif
-endfunction
-command! ZoomToggle call s:ZoomToggle()
-nnoremap <silent> <C-O> :ZoomToggle<CR>
-
-" ================ The Silver Searcher  =============
-
-" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-
-" bind \ (backward slash) to grep shortcut
-command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-
-nnoremap \ :Ag<SPACE>
-
-" ================ Quickfix window  ==================
-
-" leader+ENTER opens item in split window
-" autocmd! FileType qf nnoremap <buffer> <leader><Enter> <C-w><Enter><C-w>L
-" autocmd BufReadPost quickfix nnoremap <buffer> r :copen<CR>
-
-" This is only availale in the quickfix window, owing to the filetype
-" restriction on the autocmd (see below).
-function! <SID>OpenQuickfix(new_split_cmd)
-  " 1. the current line is the result idx as we are in the quickfix
-  let l:qf_idx = line('.')
-  " 2. jump to the previous window
-  wincmd p
-  " 3. switch to a new split (the new_split_cmd will be 'vnew' or 'split')
-  execute a:new_split_cmd
-  " 4. open the 'current' item of the quickfix list in the newly created buffer
-  "    (the current means, the one focused before switching to the new buffer)
-  execute l:qf_idx . 'cc'
-endfunction
-
-autocmd FileType qf nnoremap <buffer> <C-v> :call <SID>OpenQuickfix("vnew")<CR>
-autocmd FileType qf nnoremap <buffer> <C-x> :call <SID>OpenQuickfix("split")<CR>
-
-map [q :cn<CR>
-map ]q :cp<CR>
-" [Q   :cfirst
-" ]Q   :clast
-
-" ================ Turn Off Swap Files ==============
-
+" turn off swap files
 set noswapfile
 set nobackup
 set nowb
+
+" disable bell and blinking screen at end of files
+set belloff=all
+
+" Set .axlsx as ruby files
+autocmd BufNewFile,BufRead *.xlsx.axlsx set syntax=ruby
+
+" Automatically removes all trailing whitespace
+autocmd BufWritePre * %s/\s\+$//e
+
+" Fix css syntax highlight for words with hyphen
+autocmd FileType scss set iskeyword+=-
+autocmd FileType sass set iskeyword+=-
+
+" Autocomplete with dictionary words when spell check is on
+" set complete+=kspell
 
 " ================ Persistent Undo ==================
 
@@ -225,53 +170,6 @@ set scrolloff=8         "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
 
-" ================ Indentation ======================
-
-set autoindent
-set smartindent
-set smarttab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-set expandtab
-
-au BufNewFile,BufRead *.dart
-   \ set tabstop=2 |
-   \ set softtabstop=2 |
-   \ set shiftwidth=2 |
-   \ set textwidth=79 |
-   \ set expandtab |
-   \ set autoindent |
-   \ set fileformat=unix
-
-au BufNewFile,BufRead *.py
-   \ set tabstop=4 |
-   \ set softtabstop=4 |
-   \ set shiftwidth=4 |
-   \ set textwidth=79 |
-   \ set expandtab |
-   \ set autoindent |
-   \ set fileformat=unix
-
-au BufNewFile,BufRead *.rb,*.erb
-   \ set tabstop=2 |
-   \ set softtabstop=2 |
-   \ set shiftwidth=2 |
-   \ set textwidth=100 |
-   \ set expandtab |
-   \ set autoindent |
-   \ set fileformat=unix
-
-"load ftplugins and indent files
-filetype indent on
-
-" Display tabs and trailing spaces visually
-" set list listchars=tab:\ \ ,trail:·
-
-set showbreak=...
-" set nowrap       "Don't wrap lines
-set linebreak    "Wrap lines at convenient points
-
 " ================ Search ===========================
 
 set incsearch       " Find the next match as we type the search
@@ -292,174 +190,17 @@ set wildignore+=log/**
 set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
 
-" =============== Set .axlsx as ruby files ================
-
-autocmd BufNewFile,BufRead *.xlsx.axlsx set syntax=ruby
-
-" ===== Automatically removes all trailing whitespace =====
-
-autocmd BufWritePre * %s/\s\+$//e
-
-" ================ Custom Settings ========================
-
-set nocp
-set encoding=utf-8
-set background=dark
-let g:rehash256 = 1
-let t_Co = 512
-let g:molokai_original = 1
-colorscheme molokai
-
-" sex max col for syntax highlighting
-set synmaxcol=300
-" syntax sync minlines=10000
-set redrawtime=10000
-let python_highlight_all=1
-"turn on syntax highlighting
-syntax on
-
-"add some line space for easy reading
-set linespace=4
-
-set title
-
-" Ability to copy and paste outside of vim
-" set clipboard=unnamed
-" set clipboard=unnamedplus
-" yank to clipboard
-if has("clipboard")
-  set clipboard=unnamed " copy to the system clipboard
-
-  if has("unnamedplus") " X11 support
-    set clipboard+=unnamedplus
-  endif
-endif
-
-"turn off the scroll bar
-set guioptions-=L
-set guioptions-=r
-
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-"make <c-l> clear the highlight as well as redraw
-nnoremap <C-L> :nohls<CR><C-L>
-inoremap <C-L> <C-O>:nohls<CR>
-
-" Don't  know what these do
-nnoremap <Esc>A <up>
-nnoremap <Esc>B <down>
-nnoremap <Esc>C <right>
-nnoremap <Esc>D <left>
-inoremap <Esc>A <up>
-inoremap <Esc>B <down>
-inoremap <Esc>C <right>
-inoremap <Esc>D <left>
-
-" ================ Custom Settings from https://github.com/jordanhudgens/vim-settings/blob/master/vim-settings ========================
-
-" Window pane resizing
-nnoremap <silent> <Leader>[ :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
-nnoremap <silent> <Leader>] :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
-nnoremap <silent> <Leader>{ :exe "resize " . (winheight(0) * 3/2)<CR>
-nnoremap <silent> <Leader>} :exe "resize " . (winheight(0) * 2/3)<CR>
-
-" ===== Seeing Is Believing =====
-" " Assumes you have a Ruby with SiB available in the PATH
-" " If it doesn't work, you may need to `gem install seeing_is_believing -v
-" 3.0.0.beta.6`
-" " ...yeah, current release is a beta, which won't auto-install
-"
-" " Annotate every line
-"
-" nmap <leader>b :%!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk<CR>;
-"
-"  " Annotate marked lines
-"
-" nmap <leader>n :%.!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk --xmpfilter-style<CR>;
-"
-"  " Remove annotations
-"
-" nmap <leader>c :%.!seeing_is_believing --clean<CR>;
-"
-"  " Mark the current line for annotation
-"
-nmap <leader>m A # => <Esc>
-"
-"  " Mark the highlighted lines for annotation
-"
-vmap <leader>m :norm A # => <Esc>
-
-" Plugin call to ctrl p for fuzzy file search
-"
-
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" ================ Custom Helpers  ========================
-
-" make ^ work
-" nmap <S-6> ˆ
-
-" Tab completion
-" will insert tab at beginning of line,
-" will use completion if not at beginning
-set wildmode=list:longest,list:full
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<Tab>"
-    else
-        return "\<C-p>"
-    endif
-endfunction
-inoremap <Tab> <C-r>=InsertTabWrapper()<CR>
-inoremap <S-Tab> <C-n>
-
-" when press { + Enter, the {} block will expand.
-imap {<CR> {}<ESC>i<CR><ESC>
-
-"map Q to something useful
-noremap Q gg=G
-
-" Remove all ; from file
-map <Leader>; :%s/;//g <CR>
-map <Leader>. :%s/{//g <CR>
-map <Leader>/ :%s/}//g <CR>
-
-" Copy outside of vim with C-y and paste with C-p
-nnoremap <C-y> "+y
-vnoremap <C-y> "+y
-nnoremap <C-p> "+gP
-vnoremap <C-p> "+gP
-
-" ================ NOT WORKING =====================
-" Use Alt- numbers to pick the tab you want
-" map <silent> <A-1> :tabn 1<cr>
-" map <silent> <A-2> :tabn 2<cr>
-" map <silent> <A-3> :tabn 3<cr>
-" map <silent> <A-4> :tabn 4<cr>
-" map <silent> <A-5> :tabn 5<cr>
-" map <silent> <A-6> :tabn 6<cr>
-" map <silent> <A-7> :tabn 7<cr>
-" map <silent> <A-8> :tabn 8<cr>
-" map <silent> <A-9> :tabn 9<cr>
-
-" ===================================================
-" ================ PLUGINS ==========================
-" ===================================================
-
-" ================ NERDTreeTabs =====================
-
-" Auto open nerd tree on startup
-" let g:nerdtree_tabs_open_on_gui_startup = 0
-
-" Focus in the main content window
-" let g:nerdtree_tabs_focus_on_files = 1
-
-" map <Leader>n <plug>NERDTreeTabsToggle<CR>
-
 " ================ NERDTree =========================
+
+" Custom icons for expandable/expanded directories
+" let g:NERDTreeDirArrowExpandable = '⬏'
+" let g:NERDTreeDirArrowCollapsible = '⬎'
+
+" Automaticaly close nvim if NERDTree is only thing left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Show hidden files/directories
+let g:NERDTreeShowHidden = 1
 
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinSize = 30
@@ -475,23 +216,322 @@ nmap wm :NERDTree<cr>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 let NERDTreeIgnore=['\.swp$']
 
-" ================ Fugitive ==========================
+" =========================================================================== "
+" ===                               UI                                    === "
+" =========================================================================== "
 
-" Enable gitlab private repos for fugitive plugin
-let g:fugitive_gitlab_domains = ['http://gitlab', 'http://gitlab.com']
+" Enable true color support
+set termguicolors
 
-" Always use vertical diffs
-set diffopt+=vertical
+" Editor theme
+set background=dark
+colorscheme gruvbox
 
-" For fugitive.git, dp means :diffput. Define dg to mean :diffget
-nnoremap <silent> ,dg :diffget<CR>
-nnoremap <silent> ,dp :diffput<CR>
+" Add custom highlights in method that is executed every time a colorscheme is sourced
+" See https://gist.github.com/romainl/379904f91fa40533175dfaec4c833f2f for details
+function! MyHighlights() abort
+  " Hightlight trailing whitespace
+  highlight Trail ctermbg=red guibg=red
+  call matchadd('Trail', '\s\+$', 100)
+endfunction
 
-" ================ Rails =============================
+augroup MyColors
+  autocmd!
+  autocmd ColorScheme * call MyHighlights()
+augroup END
 
-" Better key maps for switching between controller and view
-nnoremap ,vv :Rview<cr>
-nnoremap ,cc :Rcontroller<cr>
+" Change vertical split character to be a space (essentially hide it)
+set fillchars+=vert:.
+
+" Set preview window to appear at bottom
+set splitbelow
+
+" Don't dispay mode in command line (airilne already shows it)
+set noshowmode
+
+" coc.nvim color changes
+hi! link CocErrorSign WarningMsg
+hi! link CocWarningSign Number
+hi! link CocInfoSign Type
+
+" Make background transparent for many things
+hi! Normal ctermbg=NONE guibg=NONE
+hi! NonText ctermbg=NONE guibg=NONE
+hi! LineNr ctermfg=NONE guibg=NONE
+hi! SignColumn ctermfg=NONE guibg=NONE
+hi! StatusLine guifg=#16252b guibg=#6699CC
+hi! StatusLineNC guifg=#16252b guibg=#16252b
+
+" Try to hide vertical spit and end of buffer symbol
+hi! VertSplit gui=NONE guifg=#17252c guibg=#17252c
+hi! EndOfBuffer ctermbg=NONE ctermfg=NONE guibg=#17252c guifg=#17252c
+
+" Customize NERDTree directory
+hi! NERDTreeCWD guifg=#99c794
+
+" Make background color transparent for git changes
+hi! SignifySignAdd guibg=NONE
+hi! SignifySignDelete guibg=NONE
+hi! SignifySignChange guibg=NONE
+
+" Highlight git change signs
+hi! SignifySignAdd guifg=#99c794
+hi! SignifySignDelete guifg=#ec5f67
+hi! SignifySignChange guifg=#c594c5
+
+" Call method on window enter
+augroup WindowManagement
+  autocmd!
+  autocmd WinEnter * call Handle_Win_Enter()
+augroup END
+
+" Change highlight group of preview window when open
+function! Handle_Win_Enter()
+  if &previewwindow
+    setlocal winhighlight=Normal:MarkdownError
+  endif
+endfunction
+
+" ==================== Splits ====================
+
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+
+" Easy CTRL+W with SHIFT
+nnoremap <S-DOWN> <C-W><C-J>
+nnoremap <S-UP> <C-W><C-K>
+nnoremap <S-RIGHT> <C-W><C-L>
+nnoremap <S-LEFT> <C-W><C-H>
+
+" Easy CTRL+W with C-vimkeys
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
+
+" Resize windows with arrow keys
+nnoremap <tab><Up> <C-w>+
+nnoremap <tab><Down> <C-w>-
+nnoremap <tab><Left> <C-w><
+nnoremap <tab><Right> <C-w>>
+
+" =========================================================================== "
+" ===                            KEY MAPPINGS                             === "
+" =========================================================================== "
+
+map ,Q :lclose<CR>
+map ,q :ccl<CR>
+
+" Allow saving of files as sudo when I forget to start vim using sudo
+cmap w!! w !sudo tee > /dev/null %
+
+" Map ,, to open last file
+nnoremap <Leader><Leader> <C-^>
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+"make <c-l> clear the highlight as well as redraw
+nnoremap <C-L> :nohls<CR><C-L>
+inoremap <C-L> <C-O>:nohls<CR>
+
+" Force the use of HJKL as cursor movement
+" nnoremap <Left> :echoe "Use h"<CR>
+" nnoremap <Right> :echoe "Use l"<CR>
+" nnoremap <Up> :echoe "Use k"<CR>
+" nnoremap <Down> :echoe "Use j"<CR>
+
+" Tab completion
+" will insert tab at beginning of line,
+" will use completion if not at beginning
+" set wildmode=list:longest,list:full
+" function! InsertTabWrapper()
+"     let col = col('.') - 1
+"     if !col || getline('.')[col - 1] !~ '\k'
+"         return "\<Tab>"
+"     else
+"         return "\<C-p>"
+"     endif
+" endfunction
+" inoremap <Tab> <C-r>=InsertTabWrapper()<CR>
+" inoremap <S-Tab> <C-n>
+
+" when press { + Enter, the {} block will expand.
+imap {<CR> {}<ESC>i<CR><ESC>
+
+"map Q to something useful, like indenting the file
+noremap Q gg=G
+
+" Remove all ; from file
+map <Leader>; :%s/;//g <CR>
+" Remove all { from file
+map <Leader>. :%s/{//g <CR>
+" Remove all } from file
+map <Leader>/ :%s/}//g <CR>
+
+" Copy outside of vim with C-y and paste with C-p
+nnoremap <C-y> "+y
+vnoremap <C-y> "+y
+nnoremap <C-p> "+gP
+vnoremap <C-p> "+gP
+
+" bind \ (backward slash) to grep shortcut
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap \ :Ag<SPACE>
+
+" ================ Zoom on Windows  ===============
+
+" Zoom / Restore window.
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <silent> <C-O> :ZoomToggle<CR>
+
+" ================ Quickfix window  ==================
+
+" leader+ENTER opens item in split window
+" autocmd! FileType qf nnoremap <buffer> <leader><Enter> <C-w><Enter><C-w>L
+" autocmd BufReadPost quickfix nnoremap <buffer> r :copen<CR>
+
+" This is only availale in the quickfix window, owing to the filetype
+" restriction on the autocmd (see below).
+function! <SID>OpenQuickfix(new_split_cmd)
+  " 1. the current line is the result idx as we are in the quickfix
+  let l:qf_idx = line('.')
+  " 2. jump to the previous window
+  wincmd p
+  " 3. switch to a new split (the new_split_cmd will be 'vnew' or 'split')
+  execute a:new_split_cmd
+  " 4. open the 'current' item of the quickfix list in the newly created buffer
+  "    (the current means, the one focused before switching to the new buffer)
+  execute l:qf_idx . 'cc'
+endfunction
+
+autocmd FileType qf nnoremap <buffer> <C-v> :call <SID>OpenQuickfix("vnew")<CR>
+autocmd FileType qf nnoremap <buffer> <C-x> :call <SID>OpenQuickfix("split")<CR>
+
+map [q :cn<CR>
+map ]q :cp<CR>
+" [Q   :cfirst
+" ]Q   :clast
+
+" =========================================================================== "
+" ===                            INDENTATION                              === "
+" =========================================================================== "
+
+set autoindent
+set smartindent
+set smarttab
+set tabstop=2
+
+" add some line space for easy reading
+set linespace=4
+
+" Indentation amount for < and > commands.
+set shiftwidth=2
+
+" Change number of spaces that a <Tab> counts for during editing ops
+set softtabstop=2
+
+" Insert spaces when TAB is pressed.
+set expandtab
+
+" Dart rules
+au BufNewFile,BufRead *.dart
+   \ set tabstop=2 |
+   \ set softtabstop=2 |
+   \ set shiftwidth=2 |
+   \ set textwidth=79 |
+   \ set expandtab |
+   \ set autoindent |
+   \ set fileformat=unix
+
+" Python rules
+au BufNewFile,BufRead *.py
+   \ set tabstop=4 |
+   \ set softtabstop=4 |
+   \ set shiftwidth=4 |
+   \ set textwidth=79 |
+   \ set expandtab |
+   \ set autoindent |
+   \ set fileformat=unix
+
+" Ruby rules
+au BufNewFile,BufRead *.rb,*.erb
+   \ set tabstop=2 |
+   \ set softtabstop=2 |
+   \ set shiftwidth=2 |
+   \ set textwidth=100 |
+   \ set expandtab |
+   \ set autoindent |
+   \ set fileformat=unix
+
+" =========================================================================== "
+" ===                            PLUGINS                                  === "
+" =========================================================================== "
+
+" ====================== airline ======================
+
+" Vim airline theme
+let g:airline_theme='deus'
+
+" Airline (pretty tabs)
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+" ====================== coc ======================
+
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_global_extensions = ['coc-solargraph']
+
+" =================== Deoplete =====================
+
+" deoplete startup
+" let g:deoplete#enable_at_startup = 1
+
+" ================ The Silver Searcher  =============
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" ================ Colorizer ======================
+
+let g:colorizer_auto_filetype='css,html'
+let g:colorizer_auto_color = 1
+let g:colorizer_skip_comments = 1
+let g:colorizer_fgcontrast = 2 " 2 is default
+let g:colorizer_colornames = 1
+let g:colorizer_syntax = 1
 
 " ================ Ale =============================
 
@@ -520,83 +560,29 @@ let g:ale_set_highlights = 0
 " highlight ALEWarning ctermfg=3
 " highlight ALEError ctermbg=DarkMagenta
 
-"================ Syntastic =========================
+" ================ UndoTree ==========================
 
-" highlight SyntasticWarning NONE
-" highlight SyntasticError NONE
+nnoremap <silent> <Leader>g :UndotreeToggle<CR>
 
-" "mark syntax errors with :signs
-" let g:syntastic_enable_signs=1
-" "automatically jump to the error when saving the file
-" let g:syntastic_auto_jump=0
-" "dont show the error list automatically
-" let g:syntastic_auto_loc_list=0
-" "don't care about warnings
-" " let g:syntastic_quiet_messages = {'level': 'warnings'}
-" let g:syntastic_loc_list_height=2
+" ================ TagBar ============================
 
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 1
+nnoremap <silent> <Leader>b :TagbarToggle<CR>
 
-" " I have no idea why this is not working, as it used to
-" " be a part of syntastic code but was apparently removed
-" " This will make syntastic find the correct ruby specified by mri
-" function! s:FindRubyExec()
-"   if executable("rvm")
-"     return system("rvm tools identifier")
-"   endif
-"   return "ruby"
-" endfunction
+" ================ CtrlP =============================
 
-" let g:syntastic_ruby_checkers = ['rubocop']
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
-" if !exists("g:syntastic_ruby_exec")
-"   let g:syntastic_ruby_exec = s:FindRubyExec()
-" endif
+" ================ AutoTag ===========================
 
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
+nnoremap <leader>ct :silent ! ctags -R --languages=ruby --exclude={.git,log,node_modules,vendor,db} -f .tags<cr>
+let g:autotagTagsFile="tags"
+set tags+=.tags
 
-" Fix css syntax highlight for words with hyphen
-autocmd FileType scss set iskeyword+=-
-autocmd FileType sass set iskeyword+=-
-
-" ================ UtilSnips =====================
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-" ================ indentLine =====================
-
-let g:indentLine_setColors = 1
-let g:indentLine_conceallevel = 0
-
-" ================= Flutter =======================
-
-" Enable Flutter menu
-" call FlutterMenu()
-
-nnoremap <leader>fa :FlutterRun<cr>
-nnoremap <leader>fq :FlutterQuit<cr>
-nnoremap <leader>fr :FlutterHotReload<cr>
-nnoremap <leader>fR :FlutterHotRestart<cr>
-nnoremap <leader>fD :FlutterVisualDebug<cr>
-
-" ================ Colorizer ======================
-
-let g:colorizer_auto_filetype='css,html'
-let g:colorizer_auto_color = 1
-let g:colorizer_skip_comments = 1
-let g:colorizer_fgcontrast = 2 " 2 is default
-let g:colorizer_colornames = 1
-let g:colorizer_syntax = 1
+" =========================================================================== "
+" ===                            HELPERS                                  === "
+" =========================================================================== "
 
 " ================ PrettyXml ======================
 
@@ -629,53 +615,110 @@ function! DoPrettyXML()
 endfunction
 command! PrettyXML call DoPrettyXML()
 
-" =================== Deoplete =====================
+" =========================================================================== "
+" ===                            LEGACY                                   === "
+" =========================================================================== "
 
-" deoplete startup
-let g:deoplete#enable_at_startup = 1
+"" ================ Custom Settings from https://github.com/jordanhudgens/vim-settings/blob/master/vim-settings ========================
 
-" ================ Unclassified ===================
+"" Window pane resizing
+"nnoremap <silent> <Leader>[ :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+"nnoremap <silent> <Leader>] :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
+"nnoremap <silent> <Leader>{ :exe "resize " . (winheight(0) * 3/2)<CR>
+"nnoremap <silent> <Leader>} :exe "resize " . (winheight(0) * 2/3)<CR>
 
-map ,Q :lclose<CR>
-map ,q :ccl<CR>
+"" ===== Seeing Is Believing =====
+"" " Assumes you have a Ruby with SiB available in the PATH
+"" " If it doesn't work, you may need to `gem install seeing_is_believing -v
+"" 3.0.0.beta.6`
+"" " ...yeah, current release is a beta, which won't auto-install
+""
+"" " Annotate every line
+""
+"" nmap <leader>b :%!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk<CR>;
+""
+""  " Annotate marked lines
+""
+"" nmap <leader>n :%.!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk --xmpfilter-style<CR>;
+""
+""  " Remove annotations
+""
+"" nmap <leader>c :%.!seeing_is_believing --clean<CR>;
+""
+""  " Mark the current line for annotation
+""
+"nmap <leader>m A # => <Esc>
+""
+""  " Mark the highlighted lines for annotation
+""
+"vmap <leader>m :norm A # => <Esc>
 
-" Airline (pretty tabs)
-let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
+"" Plugin call to ctrl p for fuzzy file search
+""
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" Ctrlp
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-nnoremap <leader>. :CtrlPTag<cr>
+"" ================ NOT WORKING =====================
+"" Use Alt- numbers to pick the tab you want
+"" map <silent> <A-1> :tabn 1<cr>
+"" map <silent> <A-2> :tabn 2<cr>
+"" map <silent> <A-3> :tabn 3<cr>
+"" map <silent> <A-4> :tabn 4<cr>
+"" map <silent> <A-5> :tabn 5<cr>
+"" map <silent> <A-6> :tabn 6<cr>
+"" map <silent> <A-7> :tabn 7<cr>
+"" map <silent> <A-8> :tabn 8<cr>
+"" map <silent> <A-9> :tabn 9<cr>
 
-"avoiding annoying CSApprox warning message
-let g:CSApprox_verbose_level = 0
+"" ================ Fugitive ==========================
 
-"statusline setup
-set statusline=%f       "tail of the filename
+"" Enable gitlab private repos for fugitive plugin
+"let g:fugitive_gitlab_domains = ['http://gitlab', 'http://gitlab.com']
 
-"RVM
-set statusline+=%{exists('g:loaded_rvm')?rvm#statusline():''}
+"" Always use vertical diffs
+"set diffopt+=vertical
 
-set statusline+=%=      "left/right separator
-set statusline+=%c,     "cursor column
-set statusline+=%l/%L   "cursor line/total lines
-set statusline+=\ %P    "percent through file
-set laststatus=2
+"" For fugitive.git, dp means :diffput. Define dg to mean :diffget
+"nnoremap <silent> ,dg :diffget<CR>
+"nnoremap <silent> ,dp :diffput<CR>
 
-"map to bufexplorer
-"nnoremap <leader>b :BufExplorer<cr>
+"" ================ Rails =============================
 
-"key mapping for Gundo
-nnoremap <F4> :GundoToggle<CR>
+"" Better key maps for switching between controller and view
+"nnoremap ,vv :Rview<cr>
+"nnoremap ,cc :Rcontroller<cr>
 
-"tagbar
-nnoremap <silent> <Leader>b :TagbarToggle<CR>
+"" ================ indentLine =====================
 
-" autotag configuration
-nnoremap <leader>ct :silent ! ctags -R --languages=ruby --exclude={.git,log,node_modules,vendor,db} -f .tags<cr>
-let g:autotagTagsFile="tags"
-set tags+=.tags
+"let g:indentLine_setColors = 1
+"let g:indentLine_conceallevel = 0
 
+"" ================= Flutter =======================
+
+"" Enable Flutter menu
+"" call FlutterMenu()
+
+"nnoremap <leader>fa :FlutterRun<cr>
+"nnoremap <leader>fq :FlutterQuit<cr>
+"nnoremap <leader>fr :FlutterHotReload<cr>
+"nnoremap <leader>fR :FlutterHotRestart<cr>
+"nnoremap <leader>fD :FlutterVisualDebug<cr>
+
+"" ================ Unclassified ===================
+
+"nnoremap <leader>. :CtrlPTag<cr>
+
+""avoiding annoying CSApprox warning message
+"let g:CSApprox_verbose_level = 0
+
+""statusline setup
+"set statusline=%f       "tail of the filename
+
+""RVM
+"set statusline+=%{exists('g:loaded_rvm')?rvm#statusline():''}
+
+"set statusline+=%=      "left/right separator
+"set statusline+=%c,     "cursor column
+"set statusline+=%l/%L   "cursor line/total lines
+"set statusline+=\ %P    "percent through file
+"set laststatus=2

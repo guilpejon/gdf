@@ -1,6 +1,6 @@
-" ============================================================================ "
-" ===                               PLUGINS                                === "
-" ============================================================================ "
+" =========================================================================== "
+" ===                              PLUGINS                                === "
+" =========================================================================== "
 
 " check whether vim-plug is installed and install it if necessary
 let plugpath = expand('<sfile>:p:h'). '/autoload/plug.vim'
@@ -20,40 +20,95 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'w0rp/ale'
+" Buffer explorer (be/bt/bs/bv)
 Plug 'jlanzarotta/bufexplorer'
+
+" Horizontal lines to show identation
 Plug 'Yggdroot/indentLine'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+
+" Change surroundings (cs/ds)
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'craigemery/vim-autotag'
-Plug 'kchmck/vim-coffee-script'
-Plug 'jelera/vim-javascript-syntax'
-Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-commentary'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tpope/vim-dispatch'
-Plug 'sjl/gundo.vim'
-Plug 'ervandew/supertab'
-Plug 'majutsushi/tagbar'
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-endwise'
-Plug 'nvie/vim-flake8'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rails'
+
+" Better repeat command (.)
 Plug 'tpope/vim-repeat'
+
+" Discover and update ctags file on save
+Plug 'craigemery/vim-autotag'
+
+" Coffeescript syntax, indenting and compiling
+Plug 'kchmck/vim-coffee-script'
+
+" Insert or delete brackets, parentesis and quotes in pair
+Plug 'jiangmiao/auto-pairs'
+
+" Full path fuzzy file, buffer, mru, tag, ... finder
+Plug 'ctrlpvim/ctrlp.vim'
+
+" Create comments (gc/gcc)
+Plug 'tpope/vim-commentary'
+
+" Asynchronous build and test dispatcher (:Dispatch rspec %)
+Plug 'tpope/vim-dispatch'
+
+" Visualize undo tree
+Plug 'mbbill/undotree'
+
+" Visualize tags
+Plug 'majutsushi/tagbar'
+
+" Bundle goodies for VIM
+Plug 'tpope/vim-bundler'
+
+" Add end at the end of if/do/...
+Plug 'tpope/vim-endwise'
+
+" Git commands shortcuts (:Gstatus, :Gdiff, :Gblame)
+Plug 'tpope/vim-fugitive'
+
+" Asynchronous completion framework
 Plug 'Shougo/deoplete.nvim'
+" Required plugins for deoplete
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'roxma/nvim-yarp'
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'thosakwe/vim-flutter'
+
+" Colorize text like #fff
 Plug 'chrisbra/Colorizer'
+
+" Better syntax highlighting for js files
+Plug 'jelera/vim-javascript-syntax'
+
+" Better syntax highlighting for scss files
+Plug 'cakebaker/scss-syntax.vim'
+
+" Check syntax in Vim asynchronously and fix files
+Plug 'w0rp/ale'
+
+" Navigation sidebar
+Plug 'scrooloose/nerdtree'
+
+" Git plugin for Nerdtree
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" Completion framework and language server client
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}} " Language Server support
-Plug 'vim-ruby/vim-ruby' " For Facts, Ruby functions, and custom providers
+
+" Open markdown preview on web when editing a .md file
+Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+
+" Colorscheme
+Plug 'morhetz/gruvbox'
+
+" Status bar at the bottom of the window
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" For Facts, Ruby functions, and custom providers
+Plug 'vim-ruby/vim-ruby'
+
+" " Easy navigation on rails files
+" Plug 'tpope/vim-rails'
+
+" " Syntax and style checker for Python
+" Plug 'nvie/vim-flake8'
 
 call plug#end()
