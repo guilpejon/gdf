@@ -526,14 +526,18 @@ endif
 
 " ================ Colorizer ======================
 
-let g:colorizer_auto_filetype='css,html'
-let g:colorizer_auto_color = 1
-let g:colorizer_skip_comments = 1
-let g:colorizer_fgcontrast = 2 " 2 is default
-let g:colorizer_colornames = 1
-let g:colorizer_syntax = 1
+"Disabled because of lag
+" let g:colorizer_auto_filetype='css,html'
+" let g:colorizer_auto_color = 1
+" let g:colorizer_skip_comments = 1
+" let g:colorizer_fgcontrast = 2 " 2 is default
+" let g:colorizer_colornames = 1
+" let g:colorizer_syntax = 1
 
 " ================ Ale =============================
+
+" Disable ale completion in favor of coc
+let g:ale_completion_enabled = 0
 
 " start vim with linter column open
 let g:ale_sign_column_always = 1
