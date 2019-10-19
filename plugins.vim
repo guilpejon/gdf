@@ -41,8 +41,9 @@ Plug 'kchmck/vim-coffee-script'
 " Insert or delete brackets, parentesis and quotes in pair
 Plug 'jiangmiao/auto-pairs'
 
-" Full path fuzzy file, buffer, mru, tag, ... finder
-Plug 'ctrlpvim/ctrlp.vim'
+" Fast fuzzy file finder
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Create comments (gc/gcc)
 Plug 'tpope/vim-commentary'
@@ -96,11 +97,10 @@ Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}} " Language Server sup
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 
 " Colorscheme
-Plug 'morhetz/gruvbox'
+Plug 'guilpejon/gruvbox'
 
 " Status bar at the bottom of the window
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 
 " For Facts, Ruby functions, and custom providers
 Plug 'vim-ruby/vim-ruby'

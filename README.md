@@ -1,12 +1,8 @@
 <h1 align="center">Vim Setup</h1>
 
 <div align="center">
-  <strong>My personal VIM setup</strong>
+  WIP since 2012
 </div>
-<div align="center">
-  Just copy and paste it and you're good to go
-</div>
-
 <br/>
 
 ## Table of Contents
@@ -35,12 +31,11 @@ git clone git@github.com:guilpejon/vim-setup.git ~/.vim
 
 ## Installation
 
-The current setup is using [vim-plug](https://github.com/junegunn/vim-plug).
-To install the necessary plugins, you need to fire up VIM and use `:PlugInstall`.
+First, make sure you have [ripgrep](https://github.com/BurntSushi/ripgrep) installed.
 
-Afterwards, exit VIM and open it again.
-<br>
-That's it, you're done!
+To install the plugins, along with the rest of its dependencies, you need to fire up VIM and use the `:PlugInstall` command.
+
+Afterwards, exit VIM, open it again, and you're done!
 
 ## Support
 
