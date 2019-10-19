@@ -45,3 +45,7 @@ Afterwards, exit VIM, open it again, and you're done!
 ## Support
 
 If you find any problems or bugs, please open a new [issue](https://github.com/guilpejon/vim-setup/issues).
+
+## License
+
+Copyright (c) 2018 Guilherme Pejon Licensed under the WTFPL license.
