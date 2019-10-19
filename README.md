@@ -5,6 +5,11 @@
 </div>
 <br/>
 
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/871362/67145979-ae7f4480-f25c-11e9-9152-4730c284983d.png" />
+  <p align="center"><i>Isn't it pretty?</i></p>
+</div>
+
 ## Table of Contents
 - [Download](#download)
 - [Installation](#installation)
