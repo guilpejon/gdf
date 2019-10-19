@@ -6,7 +6,7 @@
 <br/>
 
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/871362/67145979-ae7f4480-f25c-11e9-9152-4730c284983d.png" />
+  <img src="https://user-images.githubusercontent.com/871362/67146077-9bb93f80-f25d-11e9-9119-dbd83b6b4b62.png" />
   <p align="center"><i>Isn't it pretty?</i></p>
 </div>
 
