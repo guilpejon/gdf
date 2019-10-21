@@ -11,6 +11,9 @@ let mapleader=","
 "This must be first, because it changes other options as a side effect.
 set nocompatible
 
+" set utf8 to show glyphs
+set encoding=utf-8
+
 " File-type highlighting and configuration.
 syntax on
 filetype on
@@ -113,13 +116,6 @@ set title
 set guioptions-=L
 set guioptions-=r
 
-set nocp
-set encoding=utf-8
-let g:rehash256 = 1
-let t_Co = 512
-set timeout timeoutlen=1500
-set showbreak=...
-
 " turn off swap files
 set noswapfile
 set nobackup
@@ -138,8 +134,12 @@ autocmd BufWritePre * %s/\s\+$//e
 autocmd FileType scss set iskeyword+=-
 autocmd FileType sass set iskeyword+=-
 
-" Autocomplete with dictionary words when spell check is on
-" set complete+=kspell
+" TODO, explain these lines
+set nocp
+let g:rehash256 = 1
+let t_Co = 512
+set timeout timeoutlen=1500
+set showbreak=...
 
 " ================ Persistent Undo ==================
 
@@ -700,6 +700,19 @@ nnoremap <silent> <Leader>b :TagbarToggle<CR>
 nnoremap <leader>ct :silent ! ctags -R --languages=ruby --exclude={.git,log,node_modules,vendor,db} -f .tags<cr>
 let g:autotagTagsFile="tags"
 set tags+=.tags
+
+" ================ DevIcons ===========================
+
+set guifont=Hack\ Nerd\ Font:h12
+
+if exists("g:loaded_webdevicons")
+    call webdevicons#refresh()
+endif
+
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
 
 " =========================================================================== "
 " ===                            HELPERS                                  === "

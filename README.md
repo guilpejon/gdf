@@ -17,7 +17,7 @@
 
 ## Download
 
-To start thinfgs off, make sure you already installed the latest version of VIM.
+To start things off, make sure you already installed the latest version of VIM.
 
 If you don't wanna lose your current setup, make sure you create a backup of your current `~/.vim` folder.
 
@@ -38,9 +38,10 @@ git clone git@github.com:guilpejon/vim-setup.git ~/.vim
 
 First, make sure you have [ripgrep](https://github.com/BurntSushi/ripgrep) installed.
 
+
 To install the plugins, along with the rest of its dependencies, you need to fire up VIM and use the `:PlugInstall` command.
 
-Afterwards, exit VIM, open it again, and you're done!
+You need to install **Hack Nerd Font** and set it in your terminal in order for [vim-devicons](https://github.com/ryanoasis/vim-devicons) to work. You can follow one of the options listed [here](https://github.com/ryanoasis/nerd-fonts#font-installation) to install it. After that, you may need to set it as a **non-ASCII** font in your terminal.
 
 ## Support
 

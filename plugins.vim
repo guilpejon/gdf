@@ -105,6 +105,9 @@ Plug 'vim-airline/vim-airline'
 " For Facts, Ruby functions, and custom providers
 Plug 'vim-ruby/vim-ruby'
 
+" Enable file icons on nerdtree, airline, and others
+Plug 'ryanoasis/vim-devicons'
+
 " " Easy navigation on rails files
 " Plug 'tpope/vim-rails'
 
