@@ -1,4 +1,4 @@
-<h1 align="center">Vim Setup</h1>
+<h1 align="center">Guil DotFiles</h1>
 
 <div align="center">
   WIP since 2012
