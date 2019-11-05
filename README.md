@@ -1,4 +1,4 @@
-<h1 align="center">Guil DotFiles</h1>
+<h1 align="center">GuilDotFiles</h1>
 
 <div align="center">
   WIP since 2012
@@ -11,37 +11,39 @@
 </div>
 
 ## Table of Contents
-- [Download](#download)
 - [Installation](#installation)
+- [Dependencies](#dependencies)
+- [Upgrading](#upgrading)
 - [Support](#support)
-
-## Download
-
-To start things off, make sure you already installed the latest version of VIM.
-
-If you don't wanna lose your current setup, make sure you create a backup of your current `~/.vim` folder.
-
-```
-mkdir ~/Desktop/vim_setup_backup
-mv ~/.vim/* ~/Desktop/vim_setup_backup
-```
-
-If you don't care about your current setup, just type `rm -rf ~/.vim/*`.
-
-Then, just copy and paste the code below.
-
-```
-git clone git@github.com:guilpejon/vim-setup.git ~/.vim
-```
+- [License](#license)
 
 ## Installation
 
-First, make sure you have [ripgrep](https://github.com/BurntSushi/ripgrep) installed.
+To get started, run the following command:
 
+```
+sh -c "`curl -fsSL https://raw.githubusercontent.com/guilpejon/gdf/master/install.sh`"
+```
 
-To install the plugins, along with the rest of its dependencies, you need to fire up VIM and use the `:PlugInstall` command.
+## Dependencies
+
+Make sure you have [ripgrep](https://github.com/BurntSushi/ripgrep) installed.
 
 You need to install **Hack Nerd Font** and set it in your terminal in order for [vim-devicons](https://github.com/ryanoasis/vim-devicons) to work. You can follow one of the options listed [here](https://github.com/ryanoasis/nerd-fonts#font-installation) to install it. I recommend using **Option 3** from the installation options list.
+
+## Upgrading
+
+```
+cd ~/.gdf
+git pull --rebase
+rake update
+```
+
+## What's included?
+
+### VIM
+
+TODO
 
 ## Support
 
