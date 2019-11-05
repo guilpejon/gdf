@@ -18,7 +18,7 @@
 To get started, run the following command:
 
 ```
-sh -c "`curl -fsSL https://raw.githubusercontent.com/guilpejon/gdf/master/install.sh`"
+sh -c "`curl -fsSL https://raw.githubusercontent.com/guilpejon/dotfiles/master/install.sh`"
 ```
 
 ## Dependencies
