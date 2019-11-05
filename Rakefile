@@ -36,6 +36,11 @@ task :install do
   success_msg("installed")
 end
 
+desc 'Updates the installation'
+task :update do
+  Rake::Task["install"].execute
+end
+
 private
 
 def run(cmd)
