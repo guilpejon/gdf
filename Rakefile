@@ -31,7 +31,7 @@ task :install do
 
   # install_term_theme if RUBY_PLATFORM.downcase.include?("darwin")
 
-  # run_bundle_config
+  run_bundle_config
 
   success_msg("installed")
 end
@@ -105,6 +105,27 @@ task :install_plugs do
   puts ""
 
   Plug::update_plugs
+end
+
+def number_of_cores
+  cores = if RUBY_PLATFORM.downcase.include?("darwin")
+    run %{ sysctl -n hw.ncpu }
+  else
+    run %{ nproc }
+  end.to_i
+end
+
+def run_bundle_config
+  return unless system("which bundle")
+
+  n_of_cores = number_of_cores
+  bundler_jobs = n_of_cores - 1
+  puts "======================================================"
+  puts "Configuring Bundlers for parallel gem installation."
+  puts "Bundle will use #{bundler_jobs} of #{number_of_cores} cores avilable."
+  puts "======================================================"
+  run %{ bundle config --global jobs #{bundler_jobs} }
+  puts
 end
 
 def success_msg(action)

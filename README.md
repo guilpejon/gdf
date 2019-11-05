@@ -42,8 +42,9 @@ rake update
 ## What's included?
 
 ### VIM
-
-TODO
+* TODO
+### Bundler
+* Configure Bundler to use `number_of_cores_available - 1` cores to install gems in parallel
 
 ## Support
 
