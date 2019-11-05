@@ -2,7 +2,7 @@ require 'rake'
 require 'fileutils'
 require File.join(File.dirname(__FILE__), 'bin', 'gdf', 'plug')
 
-desc "Hook our dotfiles into system-standard positions."
+desc "Hook gdf dotfiles into system-standard positions."
 task :install do
   puts
   puts "======================================================"
@@ -10,10 +10,9 @@ task :install do
   puts "======================================================"
   puts
 
-  # install_homebrew if RUBY_PLATFORM.downcase.include?("darwin")
-  # install_rvm_binstubs
+  install_homebrew if mac_os?
+  install_rvm_binstubs
 
-  # # this has all the runcoms from this directory.
   # install_files(Dir.glob('git/*')) if want_to_install?('git configs (color, aliases)')
   # install_files(Dir.glob('irb/*')) if want_to_install?('irb/pry configs (more colorful)')
   # install_files(Dir.glob('ruby/*')) if want_to_install?('rubygems config (faster/no docs)')
@@ -29,7 +28,7 @@ task :install do
 
   # install_fonts
 
-  # install_term_theme if RUBY_PLATFORM.downcase.include?("darwin")
+  # install_term_theme if mac_os?
 
   run_bundle_config
 
@@ -42,6 +41,10 @@ task :update do
 end
 
 private
+
+def mac_os?
+  RUBY_PLATFORM.downcase.include?("darwin")
+end
 
 def run(cmd)
   puts "[Running] #{cmd}"
@@ -113,6 +116,42 @@ def number_of_cores
   else
     run %{ nproc }
   end.to_i
+end
+
+def install_homebrew
+  run %{which brew}
+  unless $?.success?
+    puts "======================================================"
+    puts "Installing Homebrew, the OSX package manager...If it's"
+    puts "already installed, this will do nothing."
+    puts "======================================================"
+    run %{ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"}
+  end
+  puts
+  puts
+  puts "======================================================"
+  puts "Updating Homebrew."
+  puts "======================================================"
+  run %{brew update}
+  puts
+  puts
+  puts "======================================================"
+  puts "Installing Homebrew packages...There may be some warnings."
+  puts "======================================================"
+  run %{brew install zsh ctags git tmux}
+  # run %{brew install zsh ctags git hub tmux reattach-to-user-namespace the_silver_searcher ghi}
+  puts
+  puts
+end
+
+def install_rvm_binstubs
+  puts "======================================================"
+  puts "Installing RVM Bundler support. Never have to type"
+  puts "bundle exec again! Please use bundle --binstubs and RVM"
+  puts "will automatically use those bins after cd'ing into dir."
+  puts "======================================================"
+  run %{ chmod +x $rvm_path/hooks/after_cd_bundler }
+  puts
 end
 
 def run_bundle_config

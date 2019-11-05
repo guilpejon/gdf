@@ -1,13 +1,8 @@
 <h1 align="center">GuilDotFiles</h1>
 
 <div align="center">
-  WIP since 2012
-</div>
-<br/>
-
-<div align="center">
   <img src="https://user-images.githubusercontent.com/871362/67146077-9bb93f80-f25d-11e9-9119-dbd83b6b4b62.png" />
-  <p align="center"><i>Isn't it pretty?</i></p>
+  <p align="center"><i>WIP since 2012</i></p>
 </div>
 
 ## Table of Contents
@@ -15,6 +10,7 @@
 - [Dependencies](#dependencies)
 - [Upgrading](#upgrading)
 - [Support](#support)
+- [Credit](#credit)
 - [License](#license)
 
 ## Installation
@@ -43,12 +39,18 @@ rake update
 
 ### VIM
 * TODO
+### Homebrew
+* With zsh, tags, git and tmux
 ### Bundler
 * Configure Bundler to use `number_of_cores_available - 1` cores to install gems in parallel
 
 ## Support
 
 If you find any problems or bugs, please open a new [issue](https://github.com/guilpejon/vim-setup/issues).
+
+## Credit
+
+This project is **heavily inspired** on [YADR](https://github.com/skwp/dotfiles).
 
 ## License
 
