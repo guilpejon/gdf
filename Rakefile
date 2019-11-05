@@ -46,6 +46,10 @@ def mac_os?
   RUBY_PLATFORM.downcase.include?("darwin")
 end
 
+def linux?
+  RUBY_PLATFORM.downcase.include?("linux")
+end
+
 def run(cmd)
   puts "[Running] #{cmd}"
   `#{cmd}` unless ENV['DEBUG']
@@ -111,7 +115,7 @@ task :install_plugs do
 end
 
 def number_of_cores
-  cores = if RUBY_PLATFORM.downcase.include?("darwin")
+  cores = if mac_os?
     run %{ sysctl -n hw.ncpu }
   else
     run %{ nproc }
