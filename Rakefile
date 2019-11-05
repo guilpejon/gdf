@@ -1,12 +1,12 @@
 require 'rake'
 require 'fileutils'
-# require File.join(File.dirname(__FILE__), 'bin', 'gdf', 'plug')
+require File.join(File.dirname(__FILE__), 'bin', 'gdf', 'plug')
 
 desc "Hook our dotfiles into system-standard positions."
-task :install => [:submodule_init, :submodules] do
+task :install do
   puts
   puts "======================================================"
-  puts "Welcome to GDR Installation."
+  puts "Welcome to GDF Installation."
   puts "======================================================"
   puts
 
@@ -22,7 +22,7 @@ task :install => [:submodule_init, :submodules] do
   # install_files(Dir.glob('vimify/*')) if want_to_install?('vimification of command line tools')
   if want_to_install?('vim configuration (highly recommended)')
     install_files(Dir.glob('{vim,vimrc}'))
-    # Rake::Task["install_plug"].execute
+    Rake::Task["install_plugs"].execute
   end
 
   # Rake::Task["install_prezto"].execute
@@ -34,28 +34,6 @@ task :install => [:submodule_init, :submodules] do
   # run_bundle_config
 
   success_msg("installed")
-end
-
-task :submodule_init do
-  # unless ENV["SKIP_SUBMODULES"]
-  #   run %{ git submodule update --init --recursive }
-  # end
-end
-
-desc "Init and update submodules."
-task :submodules do
-  # unless ENV["SKIP_SUBMODULES"]
-  #   puts "======================================================"
-  #   puts "Downloading GDR submodules...please wait"
-  #   puts "======================================================"
-
-  #   run %{
-  #     cd $HOME/.yadr
-  #     git submodule update --recursive
-  #     git clean -df
-  #   }
-  #   puts
-  # end
 end
 
 private
@@ -98,14 +76,14 @@ def install_files(files, method = :symlink)
     # Temporary solution until we find a way to allow customization
     # This modifies zshrc to load all of gdf's zsh extensions.
     # Eventually gdf's zsh extensions should be ported to prezto modules.
-    source_config_code = "for config_file ($HOME/.gdf/zsh/*.zsh) source $config_file"
-    if file == 'zshrc'
-      File.open(target, 'a+') do |zshrc|
-        if zshrc.readlines.grep(/#{Regexp.escape(source_config_code)}/).empty?
-          zshrc.puts(source_config_code)
-        end
-      end
-    end
+    # source_config_code = "for config_file ($HOME/.gdf/zsh/*.zsh) source $config_file"
+    # if file == 'zshrc'
+    #   File.open(target, 'a+') do |zshrc|
+    #     if zshrc.readlines.grep(/#{Regexp.escape(source_config_code)}/).empty?
+    #       zshrc.puts(source_config_code)
+    #     end
+    #   end
+    # end
 
     puts "=========================================================="
     puts
@@ -113,33 +91,28 @@ def install_files(files, method = :symlink)
 end
 
 desc "Runs Plug installer in a clean vim environment"
-task :install_plug do
-  # puts "======================================================"
-  # puts "Installing and updating plugins."
-  # puts "The installer will now proceed to run PluginInstall to install plugins."
-  # puts "======================================================"
+task :install_plugs do
+  puts "======================================================"
+  puts "Installing and updating plugins."
+  puts "The installer will now proceed to run PluginInstall to install plugins."
+  puts "======================================================"
 
-  # puts ""
+  puts ""
 
-  # plug_path = File.join('vim', 'plugged')
-  # unless File.exists?(plug_path)
-  #   run %{
-  #     cd $HOME/.gdf
-  #     git clone https://github.com/gmarik/vundle.git #{vundle_path}
-  #   }
-  # end
-
-  # Plug::update_plugs
+  Plug::update_plugs
 end
 
 def success_msg(action)
-  # puts ""
-  # puts "   _     _           _         "
-  # puts "  | |   | |         | |        "
-  # puts "  | |___| |_____  __| | ____   "
-  # puts "  |_____  (____ |/ _  |/ ___)  "
-  # puts "   _____| / ___ ( (_| | |      "
-  # puts "  (_______\_____|\____|_|      "
-  # puts ""
-  puts "GDR has been #{action}. Please restart your terminal and vim."
+  puts ""
+  puts "            _ .-') _              "
+  puts "           ( (  OO) )             "
+  puts "  ,----.    \     .'_    ,------. "
+  puts " '  .-./-') ,`'--..._)('-| _.---' "
+  puts " |  |_( O- )|  |  \  '(OO|(_\     "
+  puts " |  | .--, \|  |   ' |/  |  '--.  "
+  puts "(|  | '. (_/|  |   / :\_)|  .--'  "
+  puts " |  '--'  | |  '--'  /  \|  |_)   "
+  puts "  `------'  `-------'    `--'     "
+  puts ""
+  puts "GDF has been #{action}. Please restart your terminal and vim."
 end

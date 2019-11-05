@@ -1,4 +1,6 @@
-viminfo
-plugged/
-undo/
 .tags
+vim/autoload/plug.vim
+vim/undo
+vim/viminfo
+vim/plugged
+vim/.netrwhist
