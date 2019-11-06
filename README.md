@@ -23,9 +23,11 @@ sh -c "`curl -fsSL https://raw.githubusercontent.com/guilpejon/dotfiles/master/i
 
 ## Dependencies
 
-Make sure you have [ripgrep](https://github.com/BurntSushi/ripgrep) installed.
+*Install iTerm Solarized Colors*
+GDF will install Gruvbox colorschemes into your iTerm. Go to Profiles => Colors => Load Presets to pick Gruvbox Dark or Light.
 
-You need to install **Hack Nerd Font** and set it in your terminal in order for [vim-devicons](https://github.com/ryanoasis/vim-devicons) to work. You can follow one of the options listed [here](https://github.com/ryanoasis/nerd-fonts#font-installation) to install it. I recommend using **Option 3** from the installation options list.
+*Install ripgrep*
+Make sure you have [ripgrep](https://github.com/BurntSushi/ripgrep) installed.
 
 ## Upgrading
 
@@ -43,6 +45,10 @@ rake update
 * With zsh, tags, git and tmux
 ### Bundler
 * Configure Bundler to use `number_of_cores_available - 1` cores to install gems in parallel
+### Fonts
+* Roboto Mono
+### iTerm2 colorscheme
+* Gruvbox (setup not working!)
 
 ## Support
 
