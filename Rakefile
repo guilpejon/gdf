@@ -26,7 +26,7 @@ task :install do
 
   # Rake::Task["install_prezto"].execute
 
-  # install_fonts
+  install_fonts
 
   # install_term_theme if mac_os?
 
@@ -168,6 +168,15 @@ def run_bundle_config
   puts "Bundle will use #{bundler_jobs} of #{number_of_cores} cores avilable."
   puts "======================================================"
   run %{ bundle config --global jobs #{bundler_jobs} }
+  puts
+end
+
+def install_fonts
+  puts "======================================================"
+  puts "Installing patched fonts for Powerline/Lightline."
+  puts "======================================================"
+  run %{ cp -f $HOME/.gdf/fonts/* $HOME/Library/Fonts } if RUBY_PLATFORM.downcase.include?("darwin")
+  run %{ mkdir -p ~/.fonts && cp ~/.gdf/fonts/* ~/.fonts && fc-cache -vf ~/.fonts } if RUBY_PLATFORM.downcase.include?("linux")
   puts
 end
 
