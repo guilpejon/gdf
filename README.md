@@ -50,7 +50,7 @@ Configure Bundler to use `number_of_cores_available - 1` cores to install gems i
 ### Fonts
 Roboto Mono.
 ### iTerm2 colorscheme
-Gruvbox Dark and Gruvbox Light (setup not working!).
+Gruvbox Dark and Gruvbox Light.
 ### Git configuration
 GDF will take over your `~/.gitconfig`, so if you want to store your usernames, please put them into `~/.gitconfig.user`.
 
