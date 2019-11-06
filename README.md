@@ -49,6 +49,8 @@ rake update
 * Roboto Mono
 ### iTerm2 colorscheme
 * Gruvbox (setup not working!)
+### Git configuration
+* Global gitignore and gitconfig
 
 ## Support
 

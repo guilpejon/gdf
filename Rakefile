@@ -13,7 +13,7 @@ task :install do
   install_homebrew if mac_os?
   install_rvm_binstubs
 
-  # install_files(Dir.glob('git/*')) if want_to_install?('git configs (color, aliases)')
+  install_files(Dir.glob('git/*')) if want_to_install?('git configs (color, aliases)')
   # install_files(Dir.glob('irb/*')) if want_to_install?('irb/pry configs (more colorful)')
   # install_files(Dir.glob('ruby/*')) if want_to_install?('rubygems config (faster/no docs)')
   # install_files(Dir.glob('ctags/*')) if want_to_install?('ctags config (better js/ruby support)')
