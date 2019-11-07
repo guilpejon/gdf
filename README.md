@@ -39,35 +39,104 @@ rake update
 
 # What's included?
 
-### VIM configuration
+## VIM configuration
 TODO
-### ZSH with Prezto
+## ZSH with Prezto
 TODO
-### Homebrew installation
+## Homebrew installation
 With tags, git and tmux.
-### Bundler configuration
+## Bundler configuration
 Configure Bundler to use `number_of_cores_available - 1` cores to install gems in parallel.
-### Fonts
+## Fonts
 Roboto Mono.
-### iTerm2 colorscheme
+## iTerm2 colorscheme
 Gruvbox Dark and Gruvbox Light.
-### Git configuration
+## Git configuration
 GDF will take over your `~/.gitconfig`, so if you want to store your usernames, please put them into `~/.gitconfig.user`.
 
 It is recommended to use this file to set your user info. Alternately, you can set the appropriate environment variables in your `~/.secrets`.
 
-  * `git l` or `gl`- a much more usable git log
-  * `git b` or `gb`- a list of branches with summary of last commit
-  * `git r` - a list of remotes with info
-  * `git t` or `gt`- a list of tags with info
-  * `git nb` or `gnb`- a (n)ew (b)ranch - like checkout -b
-  * `git cp` or `gcp`- cherry-pick -x (showing what was cherrypicked)
-  * `git simple` - a clean format for creating changelogs
-  * `git recent-branches` - if you forgot what you've been working on
-  * `git unstage` / `guns` (remove from index) and `git uncommit` / `gunc` (revert to the time prior to the last commit - dangerous if already pushed) aliases
-  * Some sensible default configs, such as improving merge messages, push only pushes the current branch, removing status hints, and using mnemonic prefixes in diff: (i)ndex, (w)ork tree, (c)ommit and (o)bject
-  * Slightly improved colors for diff
-  * `gdmb` (g)it (d)elete (m)erged (b)ranches - Deletes all branches already merged on current branch
+### Aliases
+
+```ruby
+  # add
+  a = add                           # add
+  chunkyadd = add --patch           # stage commits chunk by chunk
+
+  # via http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
+  snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+  snapshots = !git stash list --grep snapshot
+
+  #via http://stackoverflow.com/questions/5188320/how-can-i-get-a-list-of-git-branches-ordered-by-most-recent-commit
+  recent-branches = !git for-each-ref --count=15 --sort=-committerdate refs/heads/ --format='%(refname:short)'
+
+  # branch
+  b = branch -v                     # branch (verbose)
+
+  # commit
+  c = commit -m                     # commit with message
+  ca = commit -am                   # commit all with message
+  ci = commit                       # commit
+  amend = commit --amend            # ammend your last commit
+  ammend = commit --amend           # ammend your last commit
+
+  # checkout
+  co = checkout                     # checkout
+  nb = checkout -b                  # create and switch to a new branch (mnemonic: "git new branch branchname...")
+
+  # cherry-pick
+  cp = cherry-pick -x               # grab a change from a branch
+
+  # diff
+  d = diff                          # diff unstaged changes
+  dc = diff --cached                # diff staged changes
+  last = diff HEAD^                 # diff last committed change
+
+  # log
+  l = log --graph --date=short
+  changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+  short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+  simple = log --pretty=format:\" * %s\"
+  shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
+
+  # pull
+  pl = pull                         # pull
+
+  # push
+  ps = push                         # push
+
+  # rebase
+  rc = rebase --continue            # continue rebase
+  rs = rebase --skip                # skip rebase
+
+  # remote
+  r = remote -v                     # show remotes (verbose)
+
+  # reset
+  unstage = reset HEAD              # remove files from index (tracking)
+  uncommit = reset --soft HEAD^     # go back before last commit, with files in uncommitted state
+  filelog = log -u                  # show changes to a file
+  mt = mergetool                    # fire up the merge tool
+
+  # stash
+  ss = stash                        # stash changes
+  sl = stash list                   # list stashes
+  sa = stash apply                  # apply stash (restore changes)
+  sd = stash drop                   # drop stashes (destory changes)
+
+  # status
+  s = status                        # status
+  st = status                       # status
+  stat = status                     # status
+
+  # tag
+  t = tag -n                        # show tags with <n> lines of each tag message
+
+  # svn helpers
+  svnr = svn rebase
+  svnd = svn dcommit
+  svnl = svn log --oneline --show-commit
+```
 
 # Support
 
