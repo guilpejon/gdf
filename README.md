@@ -59,9 +59,13 @@ Roboto Mono.
 ## iTerm2 colorscheme
 Gruvbox Dark and Gruvbox Light.
 ## Git configuration
-GDF will take over your `~/.gitconfig`, so if you want to store your usernames, please put them into `~/.gitconfig.user`.
+GDF will take over your `~/.gitconfig`, so if you want to store your usernames, please put them into `~/.gitconfig.user` like so:
 
-It is recommended to use this file to set your user info. Alternately, you can set the appropriate environment variables in your `~/.secrets`.
+```bash
+[user]
+  name = John Doe
+  email = johndoe@gmail.com
+```
 
 ### Aliases
 
