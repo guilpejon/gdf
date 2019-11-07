@@ -30,9 +30,6 @@ sh -c "`curl -fsSL https://raw.githubusercontent.com/guilpejon/dotfiles/master/i
 
 # Dependencies
 
-*Install iTerm Solarized Colors*
-GDF will install Gruvbox colorschemes into your iTerm. Go to Profiles => Colors => Load Presets to pick Gruvbox Dark or Light.
-
 *Install ripgrep*
 Make sure you have [ripgrep](https://github.com/BurntSushi/ripgrep) installed.
 
@@ -57,7 +54,9 @@ Configure Bundler to use `number_of_cores_available - 1` cores to install gems i
 ## Font
 Roboto Mono.
 ## iTerm2 colorscheme
-Gruvbox Dark and Gruvbox Light.
+GDF will install Gruvbox Dark and Gruvbox Light iterm colorschemes.
+
+Go to Profiles => Colors => Load Presets to pick one of them.
 ## Git configuration
 GDF will take over your `~/.gitconfig`, so if you want to store your usernames, please put them into `~/.gitconfig.user` like so:
 
