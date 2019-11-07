@@ -44,10 +44,10 @@ TODO
 ## ZSH with Prezto
 TODO
 ## Homebrew installation
-With tags, git and tmux.
+With zsh, tags, git and tmux.
 ## Bundler configuration
 Configure Bundler to use `number_of_cores_available - 1` cores to install gems in parallel.
-## Fonts
+## Font
 Roboto Mono.
 ## iTerm2 colorscheme
 Gruvbox Dark and Gruvbox Light.
