@@ -30,7 +30,6 @@ sh -c "`curl -fsSL https://raw.githubusercontent.com/guilpejon/dotfiles/master/i
 
 # Dependencies
 
-*Install ripgrep*
 Make sure you have [ripgrep](https://github.com/BurntSushi/ripgrep) installed.
 
 # Upgrading
