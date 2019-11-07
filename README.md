@@ -21,6 +21,13 @@ To get started, run the following command:
 sh -c "`curl -fsSL https://raw.githubusercontent.com/guilpejon/dotfiles/master/install.sh`"
 ```
 
+**Note:** GDF will automatically install all of its subcomponents. If you want to be asked
+about each one, use:
+
+```
+sh -c "`curl -fsSL https://raw.githubusercontent.com/guilpejon/dotfiles/master/install.sh`" -s ask
+```
+
 # Dependencies
 
 *Install iTerm Solarized Colors*
