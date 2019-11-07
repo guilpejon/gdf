@@ -54,10 +54,10 @@ Configure Bundler to use `number_of_cores_available - 1` cores to install gems i
 Roboto Mono.
 ## iTerm2 colorscheme
 GDF will install Gruvbox Dark and Gruvbox Light iterm colorschemes.
-## Other configurations
-**IRB**, **Pry**, **Gemrc** and **ctags**.
 
 Go to Profiles => Colors => Load Presets to pick one of them.
+## Other configurations
+**IRB**, **Pry**, **Gemrc**, **ctags** and **tmux**.
 ## Git configuration
 GDF will take over your `~/.gitconfig`, so if you want to store your usernames, please put them into `~/.gitconfig.user` like so:
 
