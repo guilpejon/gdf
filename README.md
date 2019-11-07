@@ -54,6 +54,7 @@ Configure Bundler to use `number_of_cores_available - 1` cores to install gems i
 Roboto Mono.
 ## iTerm2 colorscheme
 GDF will install Gruvbox Dark and Gruvbox Light iterm colorschemes.
+## IRB/Pry/Gemrc configuration
 
 Go to Profiles => Colors => Load Presets to pick one of them.
 ## Git configuration
