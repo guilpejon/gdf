@@ -13,12 +13,15 @@ task :install do
   install_homebrew if mac_os?
   install_rvm_binstubs
 
-  install_files(Dir.glob('git/*')) if want_to_install?('git configs (color, aliases)')
   install_files(Dir.glob('irb/*')) if want_to_install?('irb/pry configs (more colorful)')
   install_files(Dir.glob('ruby/*')) if want_to_install?('rubygems config (faster/no docs)')
   install_files(Dir.glob('ctags/*')) if want_to_install?('ctags config (better js/ruby support)')
   install_files(Dir.glob('tmux/*')) if want_to_install?('tmux config')
   install_files(Dir.glob('vimify/*')) if want_to_install?('vimification of command line tools')
+  if want_to_install?('git configs (color, aliases)')
+    write_git_user_file
+    install_files(Dir.glob('git/*'))
+  end
   if want_to_install?('vim configuration (highly recommended)')
     install_files(Dir.glob('{vim,vimrc}'))
     Rake::Task["install_plugs"].execute
@@ -38,6 +41,12 @@ end
 desc 'Updates the installation'
 task :update do
   Rake::Task["install"].execute
+end
+
+desc 'Removes all installation files'
+task :clean do
+  # TODO, delete all created files
+  File.delete("#{ENV["HOME"]}/.gitconfig.user")
 end
 
 task :install_prezto do
@@ -67,6 +76,30 @@ def want_to_install? (section)
     STDIN.gets.chomp == 'y'
   else
     true
+  end
+end
+
+def write_git_user_file
+  puts "======================================================"
+  puts "Git user configuration."
+  puts "======================================================"
+
+  file_name = "#{ENV["HOME"]}/.gitconfig.user"
+
+  if File.exists?(file_name)
+    response = ask "Do you wish to override your git user configuration file?", ["Yes", "No"]
+    return if response == "No"
+
+    puts "[Overwriting] #{file_name}...leaving original at #{file_name}.backup..."
+    run %{ mv "#{file_name}" "#{file_name}.backup" }
+    puts
+  end
+
+  gh_user = text_input("Git name")
+  gh_email = text_input("Git email")
+
+  File.open(file_name, 'w') do |f|
+    f.puts("[user]\n  name = #{gh_user}  email = #{gh_email}")
   end
 end
 
@@ -236,6 +269,11 @@ def iTerm_profile_list
   end while $?.exitstatus==0
   profiles.pop
   profiles
+end
+
+def text_input(field)
+  puts "#{field}: "
+  STDIN.gets
 end
 
 def ask(message, values)
