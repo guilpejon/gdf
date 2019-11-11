@@ -135,7 +135,7 @@ Go to Profiles => Colors => Load Presets to pick one of them.
   svnl = svn log --oneline --show-commit
 ```
 ## Other configurations
-**IRB**, **Pry**, **Gemrc**, **ctags**, **tmux** and **"vimification"**.
+**IRB**, **Pry**, **Gemrc**, **ctags** and **tmux**.
 
 # Support
 
