@@ -259,10 +259,6 @@ hi! SignColumn ctermfg=NONE guibg=NONE
 hi! StatusLine guifg=#16252b guibg=#6699CC
 hi! StatusLineNC guifg=#16252b guibg=#16252b
 
-" Try to hide vertical spit and end of buffer symbol
-hi! VertSplit gui=NONE guifg=#17252c guibg=#17252c
-hi! EndOfBuffer ctermbg=NONE ctermfg=NONE guibg=#17252c guifg=#17252c
-
 " Customize NERDTree directory
 hi! NERDTreeCWD guifg=#99c794
 

@@ -56,8 +56,6 @@ Roboto Mono.
 GDF will install Gruvbox Dark and Gruvbox Light iterm colorschemes.
 
 Go to Profiles => Colors => Load Presets to pick one of them.
-## Other configurations
-**IRB**, **Pry**, **Gemrc**, **ctags**, **tmux** and **"vimification"**.
 ## Git configuration
 GDF will take over your `~/.gitconfig`, so if you want to store your usernames, please put them into `~/.gitconfig.user` like so:
 
@@ -148,6 +146,8 @@ GDF will take over your `~/.gitconfig`, so if you want to store your usernames, 
   svnd = svn dcommit
   svnl = svn log --oneline --show-commit
 ```
+## Other configurations
+**IRB**, **Pry**, **Gemrc**, **ctags**, **tmux** and **"vimification"**.
 
 # Support
 
