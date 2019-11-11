@@ -28,10 +28,6 @@ about each one, use:
 sh -c "`curl -fsSL https://raw.githubusercontent.com/guilpejon/dotfiles/master/install.sh`" -s ask
 ```
 
-# Dependencies
-
-Make sure you have [ripgrep](https://github.com/BurntSushi/ripgrep) installed.
-
 # Upgrading
 
 ```
@@ -47,7 +43,7 @@ TODO
 ## ZSH with Prezto
 TODO
 ## Homebrew installation
-With zsh, tags, git and tmux.
+With zsh, tags, git, tmux and ripgrep.
 ## Bundler configuration
 Configure Bundler to use `number_of_cores_available - 1` cores to install gems in parallel.
 ## Font
@@ -57,14 +53,6 @@ GDF will install Gruvbox Dark and Gruvbox Light iterm colorschemes.
 
 Go to Profiles => Colors => Load Presets to pick one of them.
 ## Git configuration
-GDF will take over your `~/.gitconfig`, so if you want to store your usernames, please put them into `~/.gitconfig.user` like so:
-
-```bash
-[user]
-  name = John Doe
-  email = johndoe@gmail.com
-```
-
 ### Aliases
 
 ```ruby

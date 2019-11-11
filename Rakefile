@@ -11,6 +11,7 @@ task :install do
   puts
 
   install_homebrew if mac_os?
+  install_ripgrep if linux? # ripgrep is already installed on macs with homebrew
   install_rvm_binstubs
 
   install_files(Dir.glob('irb/*')) if want_to_install?('irb/pry configs (more colorful)')
@@ -68,6 +69,36 @@ end
 def run(cmd)
   puts "[Running] #{cmd}"
   `#{cmd}` unless ENV['DEBUG']
+end
+
+def install_homebrew
+  run %{which brew}
+  unless $?.success?
+    puts "======================================================"
+    puts "Installing Homebrew, the OSX package manager...If it's"
+    puts "already installed, this will do nothing."
+    puts "======================================================"
+    run %{ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"}
+  end
+  puts
+  puts
+  puts "======================================================"
+  puts "Updating Homebrew."
+  puts "======================================================"
+  run %{brew update}
+  puts
+  puts
+  puts "======================================================"
+  puts "Installing Homebrew packages...There may be some warnings."
+  puts "======================================================"
+  run %{brew install zsh ctags git tmux ripgrep}
+  puts
+  puts
+end
+
+def install_ripgrep
+  run %{ curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb }
+  run %{ sudo dpkg -i ripgrep_11.0.2_amd64.deb }
 end
 
 def want_to_install? (section)
@@ -159,31 +190,6 @@ def number_of_cores
   else
     run %{ nproc }
   end.to_i
-end
-
-def install_homebrew
-  run %{which brew}
-  unless $?.success?
-    puts "======================================================"
-    puts "Installing Homebrew, the OSX package manager...If it's"
-    puts "already installed, this will do nothing."
-    puts "======================================================"
-    run %{ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"}
-  end
-  puts
-  puts
-  puts "======================================================"
-  puts "Updating Homebrew."
-  puts "======================================================"
-  run %{brew update}
-  puts
-  puts
-  puts "======================================================"
-  puts "Installing Homebrew packages...There may be some warnings."
-  puts "======================================================"
-  run %{brew install zsh ctags git tmux}
-  puts
-  puts
 end
 
 def install_rvm_binstubs
