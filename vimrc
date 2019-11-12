@@ -330,8 +330,8 @@ cmap w!! w !sudo tee > /dev/null %
 " Map ,, to open last file
 nnoremap <Leader><Leader> <C-^>
 
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" bind K to rip grep word under cursor
+nnoremap K :Rg \b<C-R><C-W>\b<CR>
 
 "make <c-l> clear the highlight as well as redraw
 nnoremap <C-L> :nohls<CR><C-L>
