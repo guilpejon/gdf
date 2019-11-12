@@ -10,8 +10,9 @@ task :install do
   puts "======================================================"
   puts
 
-  install_homebrew if mac_os?
-  install_ripgrep if linux? # ripgrep is already installed on macs with homebrew
+  install_mac_packages if mac_os?
+  install_linux_packages if linux?
+
   install_rvm_binstubs
 
   install_files(Dir.glob('irb/*')) if want_to_install?('irb/pry configs (more colorful)')
@@ -71,7 +72,7 @@ def run(cmd)
   `#{cmd}` unless ENV['DEBUG']
 end
 
-def install_homebrew
+def install_mac_packages
   run %{which brew}
   unless $?.success?
     puts "======================================================"
@@ -96,9 +97,20 @@ def install_homebrew
   puts
 end
 
-def install_ripgrep
+def install_linux_packages
+  puts "======================================================"
+  puts "Updating Linux."
+  puts "======================================================"
+  run %{ sudo apt-get update }
+  run %{ sudo apt-get upgrade }
+
+  puts "======================================================"
+  puts "Installing linux pakages."
+  puts "======================================================"
   run %{ curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb }
   run %{ sudo dpkg -i ripgrep_11.0.2_amd64.deb }
+
+  run %{ sudo apt-get install zsh ctags git tmux terminator }
 end
 
 def want_to_install? (section)
