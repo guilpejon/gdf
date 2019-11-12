@@ -38,21 +38,33 @@ rake update
 
 # What's included?
 
-## VIM configuration
-TODO
-## ZSH with Prezto
-TODO
-## Homebrew installation
-With zsh, tags, git, tmux and ripgrep.
-## Bundler configuration
-Configure Bundler to use `number_of_cores_available - 1` cores to install gems in parallel.
+## Mac packages
+Homebrew with zsh, tags, git, tmux, ripgrep and iterm2.
+
+## Linux packages
+Zsh, tags, git, tmux, ripgrep and terminator.
+
 ## Font
 Roboto Mono.
+
+# Configurations
+## VIM
+```ruby
+  Shift + K # search for word under the cursor
+
+  #TODO, continue
+```
+## ZSH with Prezto
+```ruby
+  #TODO, start
+```
+## Bundler
+Configure Bundler to use `number_of_cores_available - 1` cores to install gems in parallel.
 ## iTerm2 colorscheme
 GDF will install Gruvbox Dark and Gruvbox Light iterm colorschemes.
 
 Go to Profiles => Colors => Load Presets to pick one of them.
-## Git configuration
+## Git
 ### Aliases
 
 ```ruby
