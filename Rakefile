@@ -19,6 +19,9 @@ task :install do
   install_files(Dir.glob('ruby/*')) if want_to_install?('rubygems config (faster/no docs)')
   install_files(Dir.glob('ctags/*')) if want_to_install?('ctags config (better js/ruby support)')
   install_files(Dir.glob('tmux/*')) if want_to_install?('tmux config')
+  if want_to_install?('zsh config')
+    set_zsh_as_default_shell
+  end
   if want_to_install?('git configs (color, aliases)')
     write_git_user_file
     install_files(Dir.glob('git/*'))
@@ -27,8 +30,6 @@ task :install do
     install_files(Dir.glob('{vim,vimrc}'))
     Rake::Task["install_plugs"].execute
   end
-
-  Rake::Task["install_prezto"].execute
 
   install_fonts
 
@@ -48,12 +49,6 @@ desc 'Removes all installation files'
 task :clean do
   # TODO, delete all created files
   File.delete("#{ENV["HOME"]}/.gitconfig.user")
-end
-
-task :install_prezto do
-  if want_to_install?('zsh enhancements & prezto')
-    install_prezto
-  end
 end
 
 private
@@ -167,18 +162,6 @@ def install_files(files, method = :symlink)
       run %{ cp -f "#{source}" "#{target}" }
     end
 
-    # Temporary solution until we find a way to allow customization
-    # This modifies zshrc to load all of gdf's zsh extensions.
-    # Eventually gdf's zsh extensions should be ported to prezto modules.
-    source_config_code = "for config_file ($HOME/.gdf/zsh/*.zsh) source $config_file"
-    if file == 'zshrc'
-      File.open(target, 'a+') do |zshrc|
-        if zshrc.readlines.grep(/#{Regexp.escape(source_config_code)}/).empty?
-          zshrc.puts(source_config_code)
-        end
-      end
-    end
-
     puts "=========================================================="
     puts
   end
@@ -277,7 +260,7 @@ def install_term_theme
 end
 
 def iTerm_available_themes
-   Dir['iTerm2/*.itermcolors'].map { |value| File.basename(value, '.itermcolors')} << 'None'
+  Dir['iTerm2/*.itermcolors'].map { |value| File.basename(value, '.itermcolors')} << 'None'
 end
 
 def iTerm_profile_list
@@ -319,25 +302,7 @@ def apply_theme_to_iterm_profile_idx(index, color_scheme_path)
   run %{ defaults read com.googlecode.iterm2 }
 end
 
-def install_prezto
-  puts
-  puts "Installing Prezto (ZSH Enhancements)..."
-
-  run %{ ln -nfs "$HOME/.gdf/zsh/prezto" "${ZDOTDIR:-$HOME}/.zprezto" }
-
-  # The prezto runcoms are only going to be installed if zprezto has never been installed
-  install_files(Dir.glob('zsh/prezto/runcoms/z*'), :symlink)
-
-  puts
-  puts "Overriding prezto ~/.zpreztorc with GDF's zpreztorc to enable additional modules..."
-  run %{ ln -nfs "$HOME/.gdf/zsh/prezto-override/zpreztorc" "${ZDOTDIR:-$HOME}/.zpreztorc" }
-
-  puts
-  puts "Creating directories for your customizations"
-  run %{ mkdir -p $HOME/.zsh.before }
-  run %{ mkdir -p $HOME/.zsh.after }
-  run %{ mkdir -p $HOME/.zsh.prompts }
-
+def set_zsh_as_default_shell
   if "#{ENV['SHELL']}".include? 'zsh' then
     puts "Zsh is already configured as your shell of choice. Restart your session to load the new settings"
   else
