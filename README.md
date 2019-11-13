@@ -42,7 +42,7 @@ rake update
 Homebrew with zsh, oh my zsh (w/ spaceship theme and zplugin), tags, git, tmux, ripgrep and iterm2.
 
 ## Linux packages
-Zsh, oh my zsh (w/ spaceship theme abd zplugin), tags, git, tmux, ripgrep and terminator.
+Zsh, oh my zsh (w/ spaceship theme and zplugin), tags, git, tmux, ripgrep and terminator.
 
 ## Font
 Roboto Mono.
@@ -54,7 +54,7 @@ Roboto Mono.
 
   #TODO, continue
 ```
-## ZSH with Prezto
+## ZSH/Oh My Zsh/Zplugin
 ```ruby
   #TODO, start
 ```

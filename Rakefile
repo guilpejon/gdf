@@ -90,7 +90,7 @@ def install_mac_packages
   puts "======================================================"
   puts "Installing Homebrew packages...There may be some warnings."
   puts "======================================================"
-  run %{brew install zsh ctags git tmux ripgrep}
+  run %{brew install zsh ctags git tmux ripgrep z}
   puts
   puts
 end
@@ -108,6 +108,7 @@ def install_linux_packages
   run %{ curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb }
   run %{ sudo dpkg -i ripgrep_11.0.2_amd64.deb }
   run %( rm ripgrep_11.0.2_amd64.deb )
+  run %{ sudo wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/z.sh }
 
   run %{ sudo apt-get install zsh ctags git tmux terminator }
 end
