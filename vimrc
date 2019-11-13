@@ -674,7 +674,7 @@ let g:ale_linters = {'jsx': ['stylelint', 'eslint']}
 
 let g:ale_fixers = {'javascript': [], 'ruby': ['rubocop']}
 " let g:ale_fixers = {'javascript': ['eslint'], 'ruby': ['rubocop']}
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 nnoremap gp :silent %!prettier --stdin --trailing-comma all --single-quote<CR>
 let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
 
