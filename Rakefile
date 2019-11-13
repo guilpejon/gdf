@@ -323,6 +323,7 @@ end
 
 def install_zplugin
   run %{ sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)" }
+  run %{ sudo chmod +777 "#{ENV['HOME']}/.zplugin" }
 end
 
 def install_zsh_config
