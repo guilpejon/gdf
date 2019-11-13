@@ -20,7 +20,9 @@ task :install do
   install_files(Dir.glob('ctags/*')) if want_to_install?('ctags config (better js/ruby support)')
   install_files(Dir.glob('tmux/*')) if want_to_install?('tmux config')
   if want_to_install?('zsh config')
+    install_oh_my_zsh
     set_zsh_as_default_shell
+    install_spaceship_theme
   end
   if want_to_install?('git configs (color, aliases)')
     write_git_user_file
@@ -300,6 +302,20 @@ def apply_theme_to_iterm_profile_idx(index, color_scheme_path)
 
   run %{ /usr/libexec/PlistBuddy -c "Merge '#{color_scheme_path}' :'New Bookmarks':#{index}" ~/Library/Preferences/com.googlecode.iterm2.plist }
   run %{ defaults read com.googlecode.iterm2 }
+end
+
+def install_oh_my_zsh
+  run %{ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" }
+end
+
+def install_spaceship_theme
+  %{ git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" }
+  %{ ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme" }
+
+  puts "Setting ZSH_THEME to spaceship."
+  if File.readlines("#{ENV['HOME']}/.zshrc").grep(/ZSH_THEME=/).empty?
+    run %{ echo ZSH_THEME="'spaceship'" | sudo tee -a "#{ENV['HOME']}/.zshrc" }
+  end
 end
 
 def set_zsh_as_default_shell
