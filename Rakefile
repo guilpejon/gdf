@@ -312,8 +312,8 @@ def install_oh_my_zsh
 end
 
 def install_spaceship_theme
-  run %{ sudo git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" }
-  run %{ ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme" }
+  run %{ git clone https://github.com/denysdovhan/spaceship-prompt.git "#{ENV['HOME']}/themes/spaceship-prompt" }
+  run %{ ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "#{ENV['HOME']}/themes/spaceship.zsh-theme" }
 
   puts "Setting ZSH_THEME to spaceship."
   if File.readlines("#{ENV['HOME']}/.zshrc").grep(/ZSH_THEME=/).empty?
