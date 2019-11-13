@@ -39,10 +39,10 @@ rake update
 # What's included?
 
 ## Mac packages
-Homebrew with zsh, tags, git, tmux, ripgrep and iterm2.
+Homebrew with zsh, oh my zsh (w/ spaceship theme and zplugin), tags, git, tmux, ripgrep and iterm2.
 
 ## Linux packages
-Zsh, tags, git, tmux, ripgrep and terminator.
+Zsh, oh my zsh (w/ spaceship theme abd zplugin), tags, git, tmux, ripgrep and terminator.
 
 ## Font
 Roboto Mono.

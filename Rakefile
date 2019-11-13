@@ -23,6 +23,8 @@ task :install do
     install_oh_my_zsh
     set_zsh_as_default_shell
     install_spaceship_theme
+    install_zplugin
+    install_zsh_config
   end
   if want_to_install?('git configs (color, aliases)')
     write_git_user_file
@@ -309,12 +311,26 @@ def install_oh_my_zsh
 end
 
 def install_spaceship_theme
-  %{ git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" }
-  %{ ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme" }
+  run %{ sudo git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" }
+  run %{ ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme" }
 
   puts "Setting ZSH_THEME to spaceship."
   if File.readlines("#{ENV['HOME']}/.zshrc").grep(/ZSH_THEME=/).empty?
     run %{ echo ZSH_THEME="'spaceship'" | sudo tee -a "#{ENV['HOME']}/.zshrc" }
+  end
+end
+
+def install_zplugin
+  run %{ sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)" }
+end
+
+def install_zsh_config
+  puts "Installing all zsh config"
+  source_config_code = "for config_file ($HOME/.gdf/zsh/*.zsh) source $config_file"
+  File.open("#{ENV['HOME']}/.zshrc", 'a+') do |zshrc|
+    if zshrc.readlines.grep(/#{Regexp.escape(source_config_code)}/).empty?
+      zshrc.puts(source_config_code)
+    end
   end
 end
 
