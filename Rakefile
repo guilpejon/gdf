@@ -130,19 +130,14 @@ def write_git_user_file
   file_name = "#{ENV["HOME"]}/.gitconfig.user"
 
   if File.exists?(file_name)
-    response = ask "Do you wish to override your git user configuration file?", ["Yes", "No"]
-    return if response == "No"
+    puts "gitconfig.user file already exists, skipping."
+  else
+    gh_user = text_input("Git name")
+    gh_email = text_input("Git email")
 
-    puts "[Overwriting] #{file_name}...leaving original at #{file_name}.backup..."
-    run %{ mv "#{file_name}" "#{file_name}.backup" }
-    puts
-  end
-
-  gh_user = text_input("Git name")
-  gh_email = text_input("Git email")
-
-  File.open(file_name, 'w') do |f|
-    f.puts("[user]\n  name = #{gh_user}  email = #{gh_email}")
+    File.open(file_name, 'w') do |f|
+      f.puts("[user]\n  name = #{gh_user}  email = #{gh_email}")
+    end
   end
 end
 
