@@ -15,14 +15,13 @@
 
 # Installation
 
-To get started, run the following command:
+To get started, make sure you have [curl](https://github.com/curl/curl) installed and run the following command to install all GDF's subcomponents:
 
 ```
 sh -c "`curl -fsSL https://raw.githubusercontent.com/guilpejon/dotfiles/master/install.sh`"
 ```
 
-**Note:** GDF will automatically install all of its subcomponents. If you want to be asked
-about each one, use:
+If you want to be asked about whether or not to install each subcomponents, you can use:
 
 ```
 sh -c "`curl -fsSL https://raw.githubusercontent.com/guilpejon/dotfiles/master/install.sh`" -s ask
