@@ -51,8 +51,7 @@ end
 
 desc 'Removes all installation files'
 task :clean do
-  # TODO, delete all created files
-  File.delete("#{ENV["HOME"]}/.gitconfig.user")
+  # TODO, delete created files
 end
 
 private
