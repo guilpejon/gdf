@@ -311,9 +311,12 @@ def install_spaceship_theme
   run %{ ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "#{ENV['HOME']}/themes/spaceship.zsh-theme" }
 
   puts "Setting ZSH_THEME to spaceship."
-  if File.readlines("#{ENV['HOME']}/.zshrc").grep(/ZSH_THEME=/).empty?
-    run %{ echo ZSH_THEME="'spaceship'" | sudo tee -a "#{ENV['HOME']}/.zshrc" }
-  end
+  filename = "#{ENV['HOME']}/.zshrc"
+  zshrc = File.readlines(filename)
+  # remove current ZSH_THEME
+  run %{ awk '!/ZSH_THEME/' #{filename} > ~/.temp && mv ~/.temp #{filename} }
+  # add spaceship theme
+  run %{ echo ZSH_THEME="'spaceship'" | sudo tee -a "#{ENV['HOME']}/.zshrc" }
 end
 
 def install_zplugin
