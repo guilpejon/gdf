@@ -9,6 +9,7 @@ task :install do
   puts "Welcome to GDF Installation."
   puts "======================================================"
   puts
+sudo apt install curl g++, gcc, autoconf, automake, bison, libc6-dev, libffi-dev, libgdbm-dev, libncurses5-dev, libsqlite3-dev, libtool, libyaml-dev, make, pkg-config, sqlite3, zlib1g-dev, libgmp-dev, libreadline-dev, libssl-dev
 
   install_mac_packages if mac_os?
   install_linux_packages if linux?
@@ -100,6 +101,15 @@ def install_linux_packages
   puts "======================================================"
   run %{ sudo apt-get update }
   run %{ sudo apt-get upgrade }
+
+  # installing RVM with latest ruby if ruby is not installed
+  ruby_installation_folder = run %{ which ruby }
+  if (ruby_installation_folder.empty?)
+    run %{ sudo apt install curl g++, gcc, autoconf, automake, bison, libc6-dev, libffi-dev, libgdbm-dev, libncurses5-dev, libsqlite3-dev, libtool, libyaml-dev, make, pkg-config, sqlite3, zlib1g-dev, libgmp-dev, libreadline-dev, libssl-dev }
+    run %{ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB }
+    run %{ curl -sSL https://get.rvm.io | bash -s stable --ruby }
+    run %{ source ~/.rvm/scripts/rvm }
+  end
 
   puts "======================================================"
   puts "Installing linux pakages."
