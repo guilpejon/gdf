@@ -9,7 +9,6 @@ task :install do
   puts "Welcome to GDF Installation."
   puts "======================================================"
   puts
-sudo apt install curl g++, gcc, autoconf, automake, bison, libc6-dev, libffi-dev, libgdbm-dev, libncurses5-dev, libsqlite3-dev, libtool, libyaml-dev, make, pkg-config, sqlite3, zlib1g-dev, libgmp-dev, libreadline-dev, libssl-dev
 
   install_mac_packages if mac_os?
   install_linux_packages if linux?
