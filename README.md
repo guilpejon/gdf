@@ -38,7 +38,7 @@ rake update
 # What's included?
 
 ## Applications
-Git, RVM, ruby, zsh, oh my zsh (w/ spaceship theme and zplugin), tags, git, tmux, ripgrep, postgres, nodejs and imagemagick.
+Git, RVM, ruby, redis, zsh, oh my zsh (w/ spaceship theme and zplugin), tags, git, tmux, ripgrep, postgres, nodejs and imagemagick.
 
 ### Linux
 Terminator.

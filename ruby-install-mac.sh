@@ -15,8 +15,12 @@ brew install imagemagick
 echo "Installs postgres"
 brew install postgres
 
-echo "Install node"
+echo "Installs node"
 brew install node
+
+echo "Installs redis"
+brew install redis
+ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
 
 echo "Installs RVM (Ruby Version Manager) for handling Ruby installation"
 curl -kL get.rvm.io | bash -s stable --ruby
