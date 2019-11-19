@@ -70,16 +70,6 @@ def run(cmd)
 end
 
 def install_mac_packages
-  run %{which brew}
-  unless $?.success?
-    puts "======================================================"
-    puts "Installing Homebrew, the OSX package manager...If it's"
-    puts "already installed, this will do nothing."
-    puts "======================================================"
-    run %{ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"}
-  end
-  puts
-  puts
   puts "======================================================"
   puts "Updating Homebrew."
   puts "======================================================"
@@ -89,7 +79,7 @@ def install_mac_packages
   puts "======================================================"
   puts "Installing Homebrew packages...There may be some warnings."
   puts "======================================================"
-  run %{brew install zsh ctags git tmux ripgrep z}
+  run %{brew install zsh ctags tmux ripgrep z}
   puts
   puts
 end
@@ -109,7 +99,7 @@ def install_linux_packages
   run %( rm ripgrep_11.0.2_amd64.deb )
   run %{ sudo wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/z.sh }
 
-  run %{ sudo apt-get install zsh ctags git tmux terminator }
+  run %{ sudo apt-get install zsh ctags tmux terminator }
 end
 
 def want_to_install? (section)
