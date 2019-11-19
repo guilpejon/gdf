@@ -32,7 +32,7 @@ task :install do
   end
   if want_to_install?('vim configuration (highly recommended)')
     install_files(Dir.glob('{vim,vimrc}'))
-    Rake::Task["install_plugs"].execute
+    install_vim
   end
 
   install_fonts
@@ -207,6 +207,18 @@ def run_bundle_config
   puts "======================================================"
   run %{ bundle config --global jobs #{bundler_jobs} }
   puts
+end
+
+def install_vim
+  run %{which vim}
+  unless $?.success?
+    puts "======================================================"
+    puts "Installing VIM."
+    puts "======================================================"
+    run %{ sudo apt-get install vim }
+  end
+
+  Rake::Task["install_plugs"].execute
 end
 
 def install_fonts
