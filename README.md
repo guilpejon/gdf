@@ -53,6 +53,7 @@ Roboto Mono.
 ## VIM
 ```ruby
   Shift + K # search for word under the cursor
+  \ <word> <folder> # search for <word> in <folder>(optional)
 
   #TODO, continue
 ```
