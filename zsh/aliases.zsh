@@ -1,3 +1,14 @@
+gdf=$HOME/.gdf
+
+# Get operating system
+platform='unknown'
+unamestr=$(uname)
+if [[ $unamestr == 'Linux' ]]; then
+  platform='linux'
+elif [[ $unamestr == 'Darwin' ]]; then
+  platform='darwin'
+fi
+
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -9,6 +20,65 @@ alias upall='git checkout master && git pull origin master; git checkout develop
 
 alias pc="heroku run rails console --remote heroku"
 alias sc="heroku run rails console --remote staging"
+
+# ruby
+alias rdm='rake db:migrate'
+alias c='rails c' # Rails 3
+
+alias ka9='killall -9'
+alias k9='kill -9'
+
+# Git Aliases
+alias gs='git status'
+alias gstsh='git stash'
+alias gst='git stash'
+alias gsp='git stash pop'
+alias gsa='git stash apply'
+alias gsh='git show'
+alias gshw='git show'
+alias gshow='git show'
+alias gi='vim .gitignore'
+alias gcm='git ci -m'
+alias gcim='git ci -m'
+alias gci='git ci'
+alias gco='git co'
+alias gcp='git cp'
+alias ga='git add -A'
+alias gap='git add -p'
+alias guns='git unstage'
+alias gunc='git uncommit'
+alias gm='git merge'
+alias gms='git merge --squash'
+alias gam='git amend --reset-author'
+alias grv='git remote -v'
+alias grr='git remote rm'
+alias grad='git remote add'
+alias gr='git rebase'
+alias gra='git rebase --abort'
+alias ggrc='git rebase --continue'
+alias gbi='git rebase --interactive'
+alias gl='git l'
+alias glg='git l'
+alias glog='git l'
+alias co='git co'
+alias gf='git fetch'
+alias gfp='git fetch --prune'
+alias gfa='git fetch --all'
+alias gfap='git fetch --all --prune'
+alias gfch='git fetch'
+alias gd='git diff'
+alias gb='git b'
+
+# mimic vim functions
+alias :q='exit'
+
+if [[ $platform == 'linux' ]]; then
+  alias ll='ls -alh --color=auto'
+  alias ls='ls --color=auto'
+elif [[ $platform == 'darwin' ]]; then
+  alias ll='ls -alGh'
+  alias ls='ls -Gh'
+fi
 
 # change to target branch
 # update target branch
