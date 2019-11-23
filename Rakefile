@@ -99,7 +99,7 @@ def install_linux_packages
   run %( rm ripgrep_11.0.2_amd64.deb )
   run %{ sudo wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/z.sh }
 
-  run %{ sudo apt-get install zsh ctags tmux terminator }
+  run %{ sudo apt-get -y install zsh ctags tmux terminator }
 end
 
 def want_to_install? (section)
