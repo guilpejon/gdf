@@ -100,7 +100,7 @@ def install_linux_packages
   
   # install Z
   run %{ sudo wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/z.sh }
-  z_path = ". #{ENV['HOME']/z.sh}"
+  z_path = ". #{ENV['HOME']}/z.sh"
   File.open("#{ENV['HOME']}/.zshrc", 'a+') do |zshrc|
     if zshrc.readlines.grep(/#{Regexp.escape(z_path)}/).empty?
       zshrc.puts(z_path)
