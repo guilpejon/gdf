@@ -317,9 +317,8 @@ def install_oh_my_zsh
 end
 
 def install_spaceship_theme
-  run %{ chmod +777 "$ZSH_CUSTOM" }
-  run %{ git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" }
-  run %{ ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme" }
+  run %{ git clone https://github.com/denysdovhan/spaceship-prompt.git "#{ENV['HOME']}/.oh-my-zsh/themes/spaceship-prompt" }
+  run %{ ln -s "#{ENV['HOME']}/.oh-my-zsh/themes/spaceship-prompt/spaceship.zsh-theme" "#{ENV['HOME']}/.oh-my-zsh/themes/spaceship.zsh-theme" }
 
   puts "Setting ZSH_THEME to spaceship."
   filename = "#{ENV['HOME']}/.zshrc"
