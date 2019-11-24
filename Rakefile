@@ -317,7 +317,7 @@ def install_oh_my_zsh
 end
 
 def install_spaceship_theme
-  run %{ chmod +777 $ZSH_CUSTOM }
+  run %{ chmod +777 "$ZSH_CUSTOM" }
   run %{ git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" }
   run %{ ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme" }
 
