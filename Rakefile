@@ -20,7 +20,8 @@ task :install do
   install_files(Dir.glob('ctags/*')) if want_to_install?('ctags config (better js/ruby support)')
   install_files(Dir.glob('tmux/*')) if want_to_install?('tmux config')
   if want_to_install?('zsh config')
-    set_zsh_as_default_shell
+    # TODO, erase code after checking that oh my zsh installation already does this
+    # set_zsh_as_default_shell
     install_oh_my_zsh
     install_spaceship_theme
     install_zplugin
