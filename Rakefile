@@ -348,6 +348,11 @@ def install_zsh_config
       zshrc.puts(source_config_code)
     end
   end
+  oh_my_zsh = "source $ZSH/oh-my-zsh.sh"
+  filename = "#{ENV['HOME']}/.zshrc"
+  zshrc = File.readlines(filename)
+  run %{ awk '!/source $ZSH/' #{filename} > ~/.temp && mv ~/.temp #{filename} }
+  run %{ echo source $ZSH/oh-my-zsh.sh | sudo tee -a "#{ENV['HOME']}/.zshrc" }
 end
 
 def set_zsh_as_default_shell
