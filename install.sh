@@ -9,7 +9,7 @@ if [ ! -d "$HOME/.gdf" ]; then
     MINGW*)     machine=minGw;;
     *)          machine="UNKNOWN:${unameOut}"
   esac
-  if ! [ -x "$(command -v ruby)" ]; then
+  if ! [ -x "$(command -v rvm)" ]; then
     echo "Ruby not installed. Installing it with RVM"
     if [ "${machine}" = "linux" ]; then
       ./ruby-install-ubuntu.sh
