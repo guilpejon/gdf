@@ -97,8 +97,16 @@ def install_linux_packages
   run %{ curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb }
   run %{ sudo dpkg -i ripgrep_11.0.2_amd64.deb }
   run %( rm ripgrep_11.0.2_amd64.deb )
+  
+  # install Z
   run %{ sudo wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/z.sh }
-
+  z_path = ". #{ENV['HOME']/z.sh}"
+  File.open("#{ENV['HOME']}/.zshrc", 'a+') do |zshrc|
+    if zshrc.readlines.grep(/#{Regexp.escape(z_path)}/).empty?
+      zshrc.puts(z_path)
+    end
+  end
+  
   run %{ sudo apt-get -y install zsh ctags tmux terminator }
 end
 
