@@ -97,8 +97,8 @@ def install_linux_packages
   puts "======================================================"
   run %{ curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb }
   run %{ sudo dpkg -i ripgrep_11.0.2_amd64.deb }
-  run %( rm ripgrep_11.0.2_amd64.deb )
-  
+  run %{ rm ripgrep_11.0.2_amd64.deb }
+
   # install Z
   run %{ sudo wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/z.sh }
   z_path = ". #{ENV['HOME']}/z.sh"
@@ -107,7 +107,7 @@ def install_linux_packages
       zshrc.puts(z_path)
     end
   end
-  
+
   run %{ sudo apt-get -y install zsh ctags tmux terminator }
 end
 
@@ -317,8 +317,9 @@ def install_oh_my_zsh
 end
 
 def install_spaceship_theme
-  run %{ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" }
-  
+  run %{ git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" }
+  run %{ ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme" }
+
   puts "Setting ZSH_THEME to spaceship."
   filename = "#{ENV['HOME']}/.zshrc"
   zshrc = File.readlines(filename)
