@@ -325,8 +325,8 @@ def install_zplugin
   run %{ git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin }
   zplugin = "source ~/.zplugin/bin/zplugin.zsh"
   File.open("#{ENV['HOME']}/.zshrc", 'a+') do |zshrc|
-    if zshrc.readlines.grep(/#{Regexp.escape(source_config_code)}/).empty?
-      zshrc.puts(source_config_code)
+    if zshrc.readlines.grep(/#{Regexp.escape(zplugin)}/).empty?
+      zshrc.puts(zplugin)
     end
   end
 end
