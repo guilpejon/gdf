@@ -28,5 +28,5 @@ if [ ! -d "$HOME/.gdf" ]; then
 
   rake install
 else
-  echo "GDR is already installed"
+  echo "GDF is already installed"
 fi
