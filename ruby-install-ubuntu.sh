@@ -19,16 +19,16 @@ source ~/.rvm/scripts/rvm
 
 echo "Installs Node"
 curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
-sudo apt install nodejs
+sudo apt install nodejs -y
 
 echo "Installs Git"
-sudo apt-get install git
+sudo apt-get install git -y
 
 echo "Installs ImageMagick for image processing"
 sudo apt-get install imagemagick --fix-missing -y
 
 echo "Installs redis"
-sudo apt-get install redis-server
+sudo apt-get install redis-server -y
 sudo systemctl enable redis-server.service
 
 echo "Installs packages"
