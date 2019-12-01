@@ -21,6 +21,9 @@ echo "Installs Node"
 curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
 sudo apt install nodejs -y
 
+echo "Instal vim-gtk for xclipboard support"
+sudo apt-get install vim-gtk -y
+
 echo "Installs Git"
 sudo apt-get install git -y
 
