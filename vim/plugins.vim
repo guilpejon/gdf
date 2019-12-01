@@ -20,6 +20,9 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+" underline word under cursor
+Plug 'itchyny/vim-cursorword'
+
 " Buffer explorer (be/bt/bs/bv)
 Plug 'jlanzarotta/bufexplorer'
 
