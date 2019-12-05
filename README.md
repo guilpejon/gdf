@@ -15,7 +15,8 @@
 
 # Installation
 
-To get started, make sure you have [curl](https://github.com/curl/curl) installed and run the following command to install all GDF's subcomponents:
+To get started, make sure you have [curl](https://github.com/curl/curl) and [newt](https://mynewt.apache.org/latest/newt/install/) installed.
+After that, run the following command to install:
 
 ```
 sh -c "`curl -fsSL https://raw.githubusercontent.com/guilpejon/dotfiles/master/install.sh`"
