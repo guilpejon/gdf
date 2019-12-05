@@ -15,6 +15,11 @@
 
 # Installation
 
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/871362/70193093-b3993580-16dc-11ea-88df-16082335087a.png" />
+  <p align="center"><i>Installation screen</i></p>
+</div>
+
 To get started, make sure you have [curl](https://github.com/curl/curl) and [newt](https://mynewt.apache.org/latest/newt/install/) installed.
 After that, run the following command to install:
 
