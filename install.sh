@@ -2,6 +2,36 @@
 
 os_name="$(uname -s)"
 
+# check if a program is installed
+command_exists()
+{
+  command -v "$1" >/dev/null 2>&1
+}
+
+# install ruby and all its dependencies
+ruby_installation()
+{
+  case "${os_name}" in
+    Linux*)     machine=linux;;
+    Darwin*)    machine=mac;;
+    CYGWIN*)    machine=cygwin;;
+    MINGW*)     machine=minGw;;
+    *)          machine="UNKNOWN:${os_name}"
+  esac
+  if ! command_exists rvm; then
+    echo "Ruby not installed. Installing it with RVM"
+    if [ "${machine}" = "linux" ]; then
+      ./ruby-install-ubuntu.sh
+    elif [ "${machine}" = "mac" ]; then
+      ./ruby-install-mac.sh
+    else
+      echo "System not yet supported"
+    fi
+  else
+    echo "Ruby already installed"
+  fi
+}
+
 #---------------------------------------------------------------------------------------------------
 # Menu system starts here
 # Display main menu
@@ -18,39 +48,33 @@ case $mainmenu_selection in
 #FULL INSTALLATION -------------------------------------------------------------------
 "full")
   [ "$1" = "ask" ] && export ASK="true"
+  if ! command_exists git; then
+    sudo apt-get install git -y
+  fi
   if [ ! -d "$HOME/.gdf" ]; then
     echo "Installing GDF for the first time"
+    if ! command_exists git; then
+      sudo apt-get install git -y
+    fi
     git clone --depth=1 https://github.com/guilpejon/dotfiles.git "$HOME/.gdf"
     # cp -R "$HOME/codes/gdf" "$HOME/.gdf"
     cd "$HOME/.gdf"
+    if ! command_exists rake; then
+      ruby_installation
+    fi
     rake install
   else
     echo "GDF is already installed"
     cd "$HOME/.gdf"
+    if ! command_exists rake; then
+      ruby_installation
+    fi
     rake install
   fi
 	;;
 #RUBY Install ------------------------------------------------------------------------
 "ruby")
-  case "${os_name}" in
-    Linux*)     machine=linux;;
-    Darwin*)    machine=mac;;
-    CYGWIN*)    machine=cygwin;;
-    MINGW*)     machine=minGw;;
-    *)          machine="UNKNOWN:${os_name}"
-  esac
-  if ! [ -x "$(command -v rvm)" ]; then
-    echo "Ruby not installed. Installing it with RVM"
-    if [ "${machine}" = "linux" ]; then
-      ./ruby-install-ubuntu.sh
-    elif [ "${machine}" = "mac" ]; then
-      ./ruby-install-mac.sh
-    else
-      echo "System not yet supported"
-    fi
-  else
-    echo "Ruby already installed"
-  fi
+  ruby_installation
 	;;
 #MAINMENU Install docker  ------------------------------------------------------------
 "docker")
