@@ -44,7 +44,7 @@ rake update
 # What's included?
 
 ## Applications
-Git, RVM, ruby, redis, zsh, oh my zsh (w/ spaceship theme and zplugin), tags, git, tmux, ripgrep, postgres, nodejs and imagemagick.
+Git, RVM, ruby, redis, zsh, oh my zsh (w/ spaceship theme and zplugin), Z, tags, git, tmux, ripgrep, postgres, nodejs and imagemagick.
 
 ### Linux
 Terminator.
@@ -56,15 +56,16 @@ Homebrew and iterm2.
 Roboto Mono.
 
 # Configurations
-## VIM
+
+## VIM Commands
 ```ruby
   Shift + K # search for word under the cursor
   \ <word> <folder> # search for <word> in <folder>(optional)
 
   #TODO, continue
 ```
-## ZSH/Oh My Zsh/Zplugin
 
+## ZSH Commands
 ```ruby
   # git flow aliases for staging and production environments
   deploy='git checkout master && git pull origin master && git push heroku master --no-verify'
@@ -135,15 +136,16 @@ Roboto Mono.
   ll='ls -alh --color=auto'
   ls='ls --color=auto'
 ```
+
 ## Bundler
 Configure Bundler to use `number_of_cores_available - 1` cores to install gems in parallel.
+
 ## iTerm2 colorscheme
 GDF will install Gruvbox Dark and Gruvbox Light iterm colorschemes.
 
 Go to Profiles => Colors => Load Presets to pick one of them.
-## Git
-### Aliases
 
+## Git Aliases
 ```ruby
   # add
   a = add                           # add
@@ -224,7 +226,7 @@ Go to Profiles => Colors => Load Presets to pick one of them.
   svnl = svn log --oneline --show-commit
 ```
 ## Other configurations
-**IRB**, **Pry**, **Gemrc**, **ctags** and **tmux**.
+**IRB**, **Pry**, **Gemrc**, **ctags**, **tmux** and **zplugin**.
 
 # Support
 
