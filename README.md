@@ -95,6 +95,8 @@ Roboto Mono.
   gi='vim .gitignore'
   gcm='git ci -m'
   gcim='git ci -m'
+  gps='git push'
+  gpl='git pull'
   gci='git ci'
   gco='git co'
   gcp='git cp'
