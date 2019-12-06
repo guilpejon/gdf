@@ -45,3 +45,6 @@ sudo snap install --classic heroku
 
 echo "Cleaning up"
 sudo apt autoremove
+
+echo "Install solargraph"
+gem install solargraph

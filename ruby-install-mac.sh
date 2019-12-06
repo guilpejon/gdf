@@ -28,3 +28,6 @@ source ~/.rvm/scripts/rvm
 
 echo "Install heroku CLI"
 brew tap heroku/brew && brew install heroku
+
+echo "Install solargraph"
+gem install solargraph
