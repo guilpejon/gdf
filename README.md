@@ -57,7 +57,17 @@ Roboto Mono.
 
 # Configurations
 
-## VIM Commands
+## Bundler
+Configure Bundler to use `number_of_cores_available - 1` cores to install gems in parallel.
+
+## iTerm2 colorscheme
+GDF will install Gruvbox Dark and Gruvbox Light iterm colorschemes.
+
+Go to Profiles => Colors => Load Presets to pick one of them.
+
+# Commands
+
+## VIM
 ```ruby
   Shift + K # search for word under the cursor
   \ <word> <folder> # search for <word> in <folder>(optional)
@@ -65,7 +75,7 @@ Roboto Mono.
   #TODO, continue
 ```
 
-## ZSH Commands
+## ZSH
 ```ruby
   # git flow aliases for staging and production environments
   deploy='git checkout master && git pull origin master && git push heroku master --no-verify'
@@ -84,7 +94,18 @@ Roboto Mono.
   ka9='killall -9'
   k9='kill -9'
 
-  # Git Aliases
+  # mimic vim functions
+  :q='exit'
+
+  # listing
+  la='ls -A'
+  l='ls -CF'
+  ll='ls -alh --color=auto'
+  ls='ls --color=auto'
+```
+
+## Git Aliases
+```ruby
   gs='git status'
   gstsh='git stash'
   gst='git stash'
@@ -127,26 +148,6 @@ Roboto Mono.
   gd='git diff'
   gb='git b'
 
-  # mimic vim functions
-  :q='exit'
-
-  # listing
-  la='ls -A'
-  l='ls -CF'
-  ll='ls -alh --color=auto'
-  ls='ls --color=auto'
-```
-
-## Bundler
-Configure Bundler to use `number_of_cores_available - 1` cores to install gems in parallel.
-
-## iTerm2 colorscheme
-GDF will install Gruvbox Dark and Gruvbox Light iterm colorschemes.
-
-Go to Profiles => Colors => Load Presets to pick one of them.
-
-## Git Aliases
-```ruby
   # add
   a = add                           # add
   chunkyadd = add --patch           # stage commits chunk by chunk
@@ -225,6 +226,7 @@ Go to Profiles => Colors => Load Presets to pick one of them.
   svnd = svn dcommit
   svnl = svn log --oneline --show-commit
 ```
+
 ## Other configurations
 **IRB**, **Pry**, **Gemrc**, **ctags**, **tmux** and **zplugin**.
 
