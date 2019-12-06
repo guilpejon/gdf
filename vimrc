@@ -331,7 +331,7 @@ cmap w!! w !sudo tee > /dev/null %
 nnoremap <Leader><Leader> <C-^>
 
 " bind K to rip grep word under cursor
-nnoremap K :Rg \b<C-R><C-W>\b<CR>
+nnoremap K :Rg <C-R><C-W><CR>
 
 "make <c-l> clear the highlight as well as redraw
 nnoremap <C-L> :nohls<CR><C-L>
