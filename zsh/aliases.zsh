@@ -9,10 +9,6 @@ elif [[ $unamestr == 'Darwin' ]]; then
   platform='darwin'
 fi
 
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
 alias deploy='git checkout master && git pull origin master && git push heroku master --no-verify'
 alias sdeploy='git checkout release && git pull origin release && git push staging release:master --no-verify'
 
@@ -72,6 +68,8 @@ alias gb='git b'
 # mimic vim functions
 alias :q='exit'
 
+alias la='ls -A'
+alias l='ls -CF'
 if [[ $platform == 'linux' ]]; then
   alias ll='ls -alh --color=auto'
   alias ls='ls --color=auto'

@@ -64,8 +64,74 @@ Roboto Mono.
   #TODO, continue
 ```
 ## ZSH/Oh My Zsh/Zplugin
+
 ```ruby
-  #TODO, start
+  # git flow aliases for staging and production environments
+  deploy='git checkout master && git pull origin master && git push heroku master --no-verify'
+  sdeploy='git checkout release && git pull origin release && git push staging release:master --no-verify'
+  upall='git checkout master && git pull origin master; git checkout develop && git pull origin develop; git checkout release && git pull origin release'
+
+  # heroku aliases
+  pc="heroku run rails console --remote heroku"
+  sc="heroku run rails console --remote staging"
+
+  # ruby
+  rdm='rake db:migrate'
+  c='rails c'
+
+  # processes
+  ka9='killall -9'
+  k9='kill -9'
+
+  # Git Aliases
+  gs='git status'
+  gstsh='git stash'
+  gst='git stash'
+  gsp='git stash pop'
+  gsa='git stash apply'
+  gsh='git show'
+  gshw='git show'
+  gshow='git show'
+  gi='vim .gitignore'
+  gcm='git ci -m'
+  gcim='git ci -m'
+  gci='git ci'
+  gco='git co'
+  gcp='git cp'
+  ga='git add -A'
+  gap='git add -p'
+  guns='git unstage'
+  gunc='git uncommit'
+  gm='git merge'
+  gms='git merge --squash'
+  gam='git amend --reset-author'
+  grv='git remote -v'
+  grr='git remote rm'
+  grad='git remote add'
+  gr='git rebase'
+  gra='git rebase --abort'
+  ggrc='git rebase --continue'
+  gbi='git rebase --interactive'
+  gl='git l'
+  glg='git l'
+  glog='git l'
+  co='git co'
+  gf='git fetch'
+  gfp='git fetch --prune'
+  gfa='git fetch --all'
+  gfap='git fetch --all --prune'
+  gfch='git fetch'
+  gd='git diff'
+  gb='git b'
+
+  # mimic vim functions
+  :q='exit'
+
+  # listing
+  la='ls -A'
+  l='ls -CF'
+  ll='ls -alh --color=auto'
+  ls='ls --color=auto'
 ```
 ## Bundler
 Configure Bundler to use `number_of_cores_available - 1` cores to install gems in parallel.
