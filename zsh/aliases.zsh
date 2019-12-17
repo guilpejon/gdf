@@ -67,6 +67,8 @@ alias gfch='git fetch'
 alias gd='git diff'
 alias gb='git b'
 
+alias heroku='/snap/bin/heroku'
+
 # mimic vim functions
 alias :q='exit'
 
