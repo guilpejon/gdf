@@ -144,16 +144,6 @@ upmergepushallmon(){
   git pull origin release
   git merge master --no-edit
 
-  # update develop-prodops with release and push it
-  git checkout develop-prodops
-  git pull origin develop-prodops
-  git merge release --no-edit
-  git push origin develop-prodops --no-verify
-
-  # update release with develop-prodops
-  git checkout release
-  git merge develop-prodops --no-edit
-
   # update develop-product with release and push it
   git checkout develop-product
   git pull origin develop-product
@@ -163,26 +153,6 @@ upmergepushallmon(){
   # update release with develop-product
   git checkout release
   git merge develop-product --no-edit
-
-  # update develop-bugs with release and push it
-  git checkout develop-bugs
-  git pull origin develop-bugs
-  git merge release --no-edit
-  git push origin develop-bugs --no-verify
-
-  # update release with develop-bugs
-  git checkout release
-  git merge develop-bugs --no-edit
-
-  # update develop-imp with release and push it
-  git checkout develop-imp
-  git pull origin develop-imp
-  git merge release --no-edit
-  git push origin develop-imp --no-verify
-
-  # update release with develop-imp
-  git checkout release
-  git merge develop-imp --no-edit
 
   # push release
   git push origin release --no-verify
