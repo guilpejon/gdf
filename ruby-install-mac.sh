@@ -18,6 +18,9 @@ brew install postgres
 echo "Installs node"
 brew install node
 
+echo "Installs yarn"
+brew install yarn
+
 echo "Installs redis"
 brew install redis
 ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
