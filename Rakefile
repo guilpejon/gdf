@@ -36,6 +36,8 @@ task :install do
     install_vim
   end
 
+  install_instant_markdown
+
   install_fonts
 
   install_term_theme if mac_os?
@@ -218,6 +220,14 @@ def install_vim
   end
 
   Rake::Task["install_plugs"].execute
+end
+
+def install_instant_markdown
+  puts "======================================================"
+  puts "Installing instant markdown."
+  puts "======================================================"
+  run %{ npm install -g instant-markdown-d } unless system("npm list -g | grep instant-markdown-d") # dont know if this if is working
+  puts
 end
 
 def install_fonts
