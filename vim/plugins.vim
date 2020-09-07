@@ -114,6 +114,9 @@ Plug 'ryanoasis/vim-devicons'
 " Easy HTML edit with macros
 Plug 'mattn/emmet-vim'
 
+" Auto close HTML tags
+Plug 'alvan/vim-closetag'
+
 " Easy navigation on rails files
 " Plug 'tpope/vim-rails'
 
