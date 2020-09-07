@@ -111,7 +111,10 @@ Plug 'vim-ruby/vim-ruby'
 " Enable file icons on nerdtree, airline, and others
 Plug 'ryanoasis/vim-devicons'
 
-" " Easy navigation on rails files
+" Easy HTML edit with macros
+Plug 'mattn/emmet-vim'
+
+" Easy navigation on rails files
 " Plug 'tpope/vim-rails'
 
 " " Syntax and style checker for Python
