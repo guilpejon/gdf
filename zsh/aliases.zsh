@@ -25,6 +25,7 @@ alias ka9='killall -9'
 alias k9='kill -9'
 
 # Git Aliases
+alias merge='merge --no-edit'
 alias gs='git status'
 alias gstsh='git stash'
 alias gst='git stash'
