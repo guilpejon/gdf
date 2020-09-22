@@ -34,3 +34,6 @@ brew tap heroku/brew && brew install heroku
 
 echo "Install solargraph"
 gem install solargraph
+
+echo "Install github client"
+brew install gh

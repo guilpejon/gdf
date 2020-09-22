@@ -54,3 +54,6 @@ sudo apt autoremove
 
 echo "Install solargraph"
 gem install solargraph
+
+echo "Install github cli"
+sudo apt install gh
