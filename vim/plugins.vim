@@ -97,7 +97,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}} " Language Server support
 
 " Open markdown preview on web when editing a .md file
-Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " Colorscheme
 Plug 'guilpejon/gruvbox'

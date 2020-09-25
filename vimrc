@@ -618,6 +618,10 @@ endif
 " Don't show git changes to current file in airline
 let g:airline#extensions#hunks#enabled=0
 
+" =============== markdown preview ================
+
+let g:mkdp_auto_start = 1
+
 " ====================== coc ======================
 
 " use <tab> for trigger completion and navigate to next complete item
