@@ -1,4 +1,6 @@
-<h2>This project has been descontinued in favor of [gldf](https://github.com/guilpejon/gldf)!</h2>
+<h1>ATTENTION</h1>
+
+This project has been discontinued in favor of [gldf](https://github.com/guilpejon/gldf)!
 
 <h1 align="center">GuilDotFiles</h1>
 
