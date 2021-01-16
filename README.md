@@ -1,3 +1,5 @@
+<h2>This project has been descontinued in favor of https://github.com/guilpejon/gldf!</h2>
+
 <h1 align="center">GuilDotFiles</h1>
 
 <div align="center">
